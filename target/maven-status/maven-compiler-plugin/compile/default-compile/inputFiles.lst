@@ -5,4 +5,6 @@
 /home/haljazara/Documents/Work-Files/nursery-api/src/main/java/com/nurseryapi/config/SwaggerConfig.java
 /home/haljazara/Documents/Work-Files/nursery-api/src/main/java/com/nurseryapi/service/UserService.java
 /home/haljazara/Documents/Work-Files/nursery-api/src/main/java/com/nurseryapi/NurseryApiApplication.java
+/home/haljazara/Documents/Work-Files/nursery-api/src/main/java/com/nurseryapi/config/ResourceServerConfig.java
+/home/haljazara/Documents/Work-Files/nursery-api/src/main/java/com/nurseryapi/config/AuthorizationServerConfig.java
 /home/haljazara/Documents/Work-Files/nursery-api/src/main/java/com/nurseryapi/entity/BaseEntity.java

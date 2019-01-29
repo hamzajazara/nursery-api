@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.nurseryapi.NurseryApiApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.378 s - in com.nurseryapi.NurseryApiApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.973 s - in com.nurseryapi.NurseryApiApplicationTests

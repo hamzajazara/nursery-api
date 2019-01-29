@@ -17,6 +17,12 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags = "Main")
 public class MainController {
 
+	@GetMapping("api/auth")
+	@ApiOperation(value = "Hello", notes = "Test")
+	public String auth() {
+		return "Hello World";
+	}
+
 	@GetMapping("hello")
 	@ApiOperation(value = "Hello", notes = "Test")
 	public String hello() {
