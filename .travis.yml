@@ -1,3 +1,4 @@
+sudo: required
 language: java
 jdk: oraclejdk8
 
@@ -10,4 +11,6 @@ on:
   branch: master
 
 script: 
-- ./mvnw clean package spring-boot:run -Dspring.profiles.active=stg
+  - mvn clean package
+  - java -jar target/rest-api-tutorial-1.0-SNAPSHOT.war
+  - mvn spring-boot:run- -Dspring.profiles.active=stg
