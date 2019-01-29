@@ -12,5 +12,5 @@ on:
 
 script: 
   - mvn clean package
-  - java -jar target/rest-api-tutorial-1.0-SNAPSHOT.war
+  - java -jar target/nursery-api-1.0-SNAPSHOT.war
   - mvn spring-boot:run- -Dspring.profiles.active=stg
