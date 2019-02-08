@@ -1,17 +1,18 @@
 package com.nurseryapi.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import javax.persistence.Column;
+import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,27 +23,26 @@ import lombok.Setter;
  *
  */
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 @Setter
 @Getter
 public class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 4866523849800709094L;
 
-	@Column(name = "created_at", nullable = false, updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_at", updatable = false)
 	@CreatedDate
-	private Date createdAt;
+	private LocalDateTime createdAt;
 
 	@Size(max = 20)
-	@Column(name = "created_by", nullable = false, updatable = false)
+	@Column(name = "created_by", updatable = false)
 	private String createdBy;
 
-	@Column(name = "updated_at", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date updatedAt;
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
 
 	@Size(max = 20)
-	@Column(name = "updated_by", nullable = false)
+	@Column(name = "updated_by")
 	private String updatedBy;
 
 	/**
@@ -52,8 +52,7 @@ public class BaseEntity implements Serializable {
 	 */
 	@PrePersist
 	public void setCreationDate() {
-		this.createdAt = new Date();
-		this.updatedAt = new Date();
+		this.createdAt = this.updatedAt = LocalDateTime.now().atOffset(ZoneOffset.UTC).toLocalDateTime();
 	}
 
 	/**
@@ -63,6 +62,6 @@ public class BaseEntity implements Serializable {
 	 */
 	@PreUpdate
 	public void setChangeDate() {
-		this.updatedAt = new Date();
+		this.updatedAt = LocalDateTime.now().atOffset(ZoneOffset.UTC).toLocalDateTime();
 	}
 }
