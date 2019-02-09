@@ -8,16 +8,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
-import com.google.common.collect.Lists;
-
+import springfox.documentation.builders.OAuthBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.GrantType;
 import springfox.documentation.service.OAuth;
 import springfox.documentation.service.ResourceOwnerPasswordCredentialsGrant;
+import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -30,6 +30,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+	private static final String SCHEMA_NAME = "Nursery Api";
+
 	/**
 	 * 
 	 * @return
@@ -39,25 +41,38 @@ public class SwaggerConfig {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("com.nurseryapi.controller")).paths(PathSelectors.any())
 				.build().securitySchemes(Collections.singletonList(securitySchema()))
-				.ignoredParameterTypes(AuthenticationPrincipal.class).securitySchemes(Lists.newArrayList(apiKey()));
+				.securityContexts(Collections.singletonList(securityContext()))
+				.ignoredParameterTypes(AuthenticationPrincipal.class);
 	}
 
-	private ApiKey apiKey() {
-		return new ApiKey("Authorization", "Authorization", "header");
-	}
+//	private ApiKey apiKey() {
+//		return new ApiKey("Authorization", "Authorization", "header");
+//	}
 
+	/**
+	 *
+	 * @return
+	 */
 	private OAuth securitySchema() {
-		List<AuthorizationScope> authorizationScopeList = new ArrayList();
-		authorizationScopeList.add(new AuthorizationScope("read", "read all"));
-		authorizationScopeList.add(new AuthorizationScope("trust", "trust all"));
-		authorizationScopeList.add(new AuthorizationScope("write", "access all"));
-
 		List<GrantType> grantTypes = new ArrayList<>();
-		GrantType creGrant = new ResourceOwnerPasswordCredentialsGrant("/oauth/token");
+		grantTypes.add(new ResourceOwnerPasswordCredentialsGrant("/oauth/token"));
+		return new OAuthBuilder().name(SCHEMA_NAME).scopes(Collections.emptyList()).grantTypes(grantTypes).build();
+	}
 
-		grantTypes.add(creGrant);
+	/**
+	 *
+	 * @return
+	 */
+	private SecurityContext securityContext() {
+		return SecurityContext.builder().securityReferences(defaultAuth()).forPaths(PathSelectors.ant("/api/**"))
+				.build();
+	}
 
-		return new OAuth("oauth2schema", authorizationScopeList, grantTypes);
-
+	/**
+	 *
+	 * @return
+	 */
+	private List<SecurityReference> defaultAuth() {
+		return Collections.singletonList(new SecurityReference(SCHEMA_NAME, new AuthorizationScope[0]));
 	}
 }
