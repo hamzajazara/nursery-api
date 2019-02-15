@@ -16,5 +16,4 @@ install:
 
 script: 
   - mvn clean package
-  - java -jar target/nursery-api-1.0-SNAPSHOT.war
   - mvn spring-boot:run -Dspring.profile.actives=stg
