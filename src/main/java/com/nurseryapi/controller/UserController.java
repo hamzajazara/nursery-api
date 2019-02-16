@@ -42,6 +42,6 @@ public class UserController {
 	@GetMapping("/who-am-i")
 	@ApiOperation(value = "Who Am I")
 	public ResponseEntity<?> whoAmI(@AuthenticationPrincipal UserEntity user) {
-		return new ResponseEntity<>(user, HttpStatus.CREATED);
+		return new ResponseEntity<>(user.getFirstName(), HttpStatus.CREATED);
 	}
 }

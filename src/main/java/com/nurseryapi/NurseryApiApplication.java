@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@PropertySource("classpath:stg/application.properties")
+@PropertySource("classpath:${spring.profile.actives:dev}/application.properties")
 public class NurseryApiApplication extends SpringBootServletInitializer {
 
 	/**

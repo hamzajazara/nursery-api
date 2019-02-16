@@ -45,10 +45,6 @@ public class SwaggerConfig {
 				.ignoredParameterTypes(AuthenticationPrincipal.class);
 	}
 
-//	private ApiKey apiKey() {
-//		return new ApiKey("Authorization", "Authorization", "header");
-//	}
-
 	/**
 	 *
 	 * @return
