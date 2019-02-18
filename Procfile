@@ -1,0 +1,1 @@
+war:deploy target/nursery-api-1.0-SNAPSHOT.war
