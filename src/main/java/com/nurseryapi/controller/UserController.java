@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nurseryapi.entity.UserEntity;
+import com.nurseryapi.entity.user.UserEntity;
 import com.nurseryapi.model.request.UserRegistrationRequest;
 import com.nurseryapi.service.UserService;
 
@@ -32,6 +32,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	/**
+	 * 
+	 * @param userRegistrationRequest
+	 * @return
+	 */
 	@PostMapping("/register")
 	@ApiOperation(value = "User Registration")
 	public ResponseEntity<?> register(@Valid @RequestBody UserRegistrationRequest userRegistrationRequest) {
@@ -39,6 +44,11 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
 	@GetMapping("/who-am-i")
 	@ApiOperation(value = "Who Am I")
 	public ResponseEntity<?> whoAmI(@AuthenticationPrincipal UserEntity user) {

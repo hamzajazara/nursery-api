@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.nurseryapi.entity.user.UserEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +35,9 @@ public class RoleEntity extends BaseEntity {
 	@Column(name = "role_id")
 	private long id;
 
-	@Column(name = "role_name")
+	@Column(name = "role_name", nullable = false, unique = true)
+	@NotNull(message = "Role name can't be null")
+	@NotBlank(message = "Role name can't be blank")
 	private String name;
 
 	@ManyToMany(mappedBy = "roles")

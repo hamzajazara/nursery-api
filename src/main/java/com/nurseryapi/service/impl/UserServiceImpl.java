@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nurseryapi.entity.RoleEntity;
-import com.nurseryapi.entity.UserEntity;
+import com.nurseryapi.entity.user.UserEntity;
 import com.nurseryapi.model.request.UserRegistrationRequest;
 import com.nurseryapi.repository.UserRepository;
 import com.nurseryapi.service.RoleService;

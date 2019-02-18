@@ -1,6 +1,6 @@
 package com.nurseryapi.service;
 
-import com.nurseryapi.entity.UserEntity;
+import com.nurseryapi.entity.user.UserEntity;
 import com.nurseryapi.model.request.UserRegistrationRequest;
 
 /**

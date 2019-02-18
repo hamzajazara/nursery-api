@@ -1,4 +1,4 @@
-package com.nurseryapi.entity;
+package com.nurseryapi.entity.user;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -15,17 +15,22 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.nurseryapi.entity.BaseEntity;
+import com.nurseryapi.entity.RoleEntity;
 import com.nurseryapi.model.constatnt.UserType;
 
 import lombok.Getter;
@@ -38,6 +43,7 @@ import lombok.Setter;
  */
 @Entity(name = "User")
 @Table(name = "user")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Setter
 @Getter
 public class UserEntity extends BaseEntity implements UserDetails {
@@ -50,39 +56,44 @@ public class UserEntity extends BaseEntity implements UserDetails {
 	private long id;
 
 	@Column(name = "user_first_name", nullable = false)
-	@NotNull
+	@NotNull(message = "User first name can't be null")
+	@NotBlank(message = "User first name can't be blank")
 	private String firstName;
 
 	@Column(name = "user_last_name")
+	@NotNull(message = "User last name can't be null")
+	@NotBlank(message = "User last name can't be blank")
 	private String lastName;
 
 	@Column(name = "user_national_id", nullable = false, unique = true)
-	@NotNull
+	@NotNull(message = "User national id can't be null")
+	@NotBlank(message = "User national id can't be blank")
 	private String nationalId;
 
 	@Column(name = "user_name", nullable = false, unique = true)
-	@NotNull
+	@NotNull(message = "User name can't be null")
+	@NotBlank(message = "User name can't be blank")
 	private String username;
 
 	@Column(name = "user_email", nullable = false, unique = true)
-	@NotNull
+	@NotNull(message = "User email can't be null")
+	@NotBlank(message = "User email can't be blank")
 	private String email;
 
 	@Column(name = "user_password", nullable = false)
-	@NotNull
 	private String password;
 
 	@Column(name = "user_phone_number")
 	@NotNull
 	private String phoneNumber;
 
-	@Column(name = "user_user_type", nullable = false)
+	@Column(name = "user_type", nullable = false)
 	@Enumerated(EnumType.STRING)
-	@NotNull
+	@NotNull(message = "User type can't be null")
+	@NotBlank(message = "User type can't be blank")
 	private UserType userType;
 
 	@Column(name = "user_verified", nullable = false)
-	@NotNull
 	private boolean verified;
 
 	@Column(name = "user_enabled", nullable = false)
