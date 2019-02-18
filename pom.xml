@@ -12,7 +12,6 @@
 	<groupId>com.hamzajazara</groupId>
 	<artifactId>nursery-api</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>nursery-api</name>
 	<description>Nursery Back-End Api</description>
 
@@ -124,20 +123,9 @@
 		</repository>
 	</repositories>
 
+
 	<build>
 		<plugins>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<webResources>
-						<resource>
-							<directory>src/main/resources</directory>
-							<targetPath>WEB-INF/lib</targetPath>
-						</resource>
-					</webResources>
-				</configuration>
-			</plugin>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
