@@ -11,7 +11,7 @@ import io.swagger.annotations.Api;
  *
  */
 @RestController("TeacherStudentController")
-@RequestMapping("/api/teacher")
+@RequestMapping("/api/teacher/student")
 @Api(tags = "Teacher")
 public class StudentController {
 }

@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiOperation;
  *
  */
 @RestController("OwnerParentController")
-@RequestMapping("/api/owner")
+@RequestMapping("/api/owner/parent")
 @Api(tags = "Owner")
 public class ParentController {
 
