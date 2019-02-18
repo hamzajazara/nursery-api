@@ -10,10 +10,5 @@ deploy:
 on:  
   branch: master
   
-install:
-- mvn -N io.takari:maven:wrapper
-- ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-
 script: 
-  - mvn clean package
-  - mvn spring-boot:run -Dspring.profile.actives=stg
+- ./mvnw clean install -B
