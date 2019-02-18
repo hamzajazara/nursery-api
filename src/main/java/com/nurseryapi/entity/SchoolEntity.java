@@ -1,8 +1,10 @@
 package com.nurseryapi.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,13 +42,13 @@ public class SchoolEntity extends BaseEntity {
 	@NotBlank(message = "School name can't be blank")
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "address_id", nullable = false)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "address_id", nullable = false, foreignKey = @ForeignKey(name = "fk_school_address_id"))
 	@NotNull(message = "Address can't be null")
 	private AddressEntity address;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "user_id", nullable = false)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "owner_user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_school_owner_user_id"))
 	@NotNull(message = "Owner can't be null")
 	private OwnerUserEntity owner;
 }
