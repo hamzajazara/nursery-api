@@ -19,4 +19,8 @@ public class Mapper {
 			return null;
 		}
 	}
+
+	public static <T> void map(Object source, T target) {
+		BeanUtils.copyProperties(source, target);
+	}
 }

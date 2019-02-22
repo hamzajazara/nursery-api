@@ -30,7 +30,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.nurseryapi.entity.BaseEntity;
-import com.nurseryapi.entity.RoleEntity;
 import com.nurseryapi.model.constatnt.UserType;
 
 import lombok.Getter;
@@ -62,7 +61,6 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
 	@Column(name = "user_last_name")
 	@NotNull(message = "User last name can't be null")
-	@NotBlank(message = "User last name can't be blank")
 	private String lastName;
 
 	@Column(name = "user_national_id", nullable = false, unique = true)
@@ -90,7 +88,6 @@ public class UserEntity extends BaseEntity implements UserDetails {
 	@Column(name = "user_type", nullable = false)
 	@Enumerated(EnumType.STRING)
 	@NotNull(message = "User type can't be null")
-	@NotBlank(message = "User type can't be blank")
 	private UserType userType;
 
 	@Column(name = "user_verified", nullable = false)

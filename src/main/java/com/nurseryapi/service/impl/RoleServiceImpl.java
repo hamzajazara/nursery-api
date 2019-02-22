@@ -3,7 +3,7 @@ package com.nurseryapi.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nurseryapi.entity.RoleEntity;
+import com.nurseryapi.entity.user.RoleEntity;
 import com.nurseryapi.repository.RoleRepository;
 import com.nurseryapi.service.RoleService;
 

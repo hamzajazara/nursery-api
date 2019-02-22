@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum UserType {
 
-	ADMIN(1), OWNER(2), STUDENT(3), PARENT(4), TEACHER(5);
+	ADMIN(1), OWNER(2), TEACHER(3), PARENT(4);
 
 	long value;
 

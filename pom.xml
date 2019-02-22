@@ -83,10 +83,11 @@
 			<artifactId>jts</artifactId>
 			<version>1.13</version>
 		</dependency>
-		<!-- H2 Database -->
+
+		<!-- liquibase -->
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
 		</dependency>
 
 		<!-- Utilities -->

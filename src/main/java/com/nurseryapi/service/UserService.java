@@ -23,4 +23,11 @@ public interface UserService {
 	 * @return
 	 */
 	UserEntity create(UserRegistrationRequest userRegistrationRequest);
+
+	/**
+	 * 
+	 * @param userRegistrationRequest
+	 * @return
+	 */
+	UserEntity userFactory(UserRegistrationRequest userRegistrationRequest);
 }

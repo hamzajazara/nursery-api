@@ -1,0 +1,14 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<!-- Change Log -->
+	<include file="classpath:/db/changelog/db.changelog-oauth.xml" />
+
+	<!-- Seed -->
+	<include file="classpath:/db/seed/db.seed.oauth-clients.xml" />
+	<include file="classpath:/db/seed/db.seed.user-roles.xml" />
+	
+</databaseChangeLog>

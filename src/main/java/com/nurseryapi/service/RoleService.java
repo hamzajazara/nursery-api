@@ -1,6 +1,6 @@
 package com.nurseryapi.service;
 
-import com.nurseryapi.entity.RoleEntity;
+import com.nurseryapi.entity.user.RoleEntity;
 
 /**
  * 

@@ -1,0 +1,21 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet author="Hamza Aljazara" id="1">
+		<insert tableName="oauth_client_details">
+			<column name="client_id" value="clientId" />
+			<column name="resource_ids" value="principal" />
+			<column name="client_secret"
+				value="$2a$10$XjbH0jzeKXMlJ5fX1Mzf4.QrgEusyTC8ZSN1342hpSSAEYneNxp8G" />
+			<column name="scope" value="read,write,trust" />
+			<column name="authorized_grant_types"
+				value="password,authorization_code,refresh_token" />
+			<column name="access_token_validity" valueNumeric="36000" />
+			<column name="refresh_token_validity" valueNumeric="36000" />
+			<column name="autoapprove" value="true" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

@@ -1,4 +1,4 @@
-package com.nurseryapi.entity;
+package com.nurseryapi.entity.user;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.nurseryapi.entity.user.UserEntity;
+import com.nurseryapi.entity.BaseEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +25,7 @@ import lombok.Setter;
  *
  */
 @Entity(name = "Role")
-@Table(name = "role")
+@Table(name = "roles")
 @Setter
 @Getter
 public class RoleEntity extends BaseEntity {
@@ -34,10 +34,10 @@ public class RoleEntity extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "role_id")
+	@Column(name = "roles_id")
 	private long id;
 
-	@Column(name = "role_name", nullable = false, unique = true)
+	@Column(name = "roles_name", nullable = false, unique = true)
 	@NotNull(message = "Role name can't be null")
 	@NotBlank(message = "Role name can't be blank")
 	private String name;
