@@ -2,7 +2,6 @@ package com.nurseryapi.model.response;
 
 import com.nurseryapi.entity.SchoolEntity;
 import com.nurseryapi.model.Address;
-import com.nurseryapi.utils.Mapper;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +21,8 @@ public class SchoolResponse {
 	 * @param schoolEntity
 	 */
 	public SchoolResponse(SchoolEntity schoolEntity) {
-		Mapper.map(schoolEntity, this);
+		this.schoolName = schoolEntity.getName();
+		this.address = new Address(schoolEntity.getAddress());
+		this.ownerId = schoolEntity.getOwner().getId();
 	}
 }

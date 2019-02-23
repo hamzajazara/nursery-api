@@ -42,6 +42,13 @@ public interface UserService {
 
 	/**
 	 * 
+	 * @param ownerId
+	 * @return
+	 */
+	UserEntity getUser(long userId);
+
+	/**
+	 * 
 	 * @param userRegistrationRequest
 	 * @param adminUser
 	 * @return

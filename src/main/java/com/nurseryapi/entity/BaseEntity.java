@@ -9,10 +9,13 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Positive;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.nurseryapi.entity.user.UserEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -34,34 +37,34 @@ public class BaseEntity implements Serializable {
 	@CreatedDate
 	private LocalDateTime createdAt;
 
-	@Size(max = 20)
+	@Positive
 	@Column(name = "created_by", updatable = false)
-	private String createdBy;
+	private long createdBy;
 
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 
-	@Size(max = 20)
+	@Positive
 	@Column(name = "updated_by")
-	private String updatedBy;
+	private long updatedBy;
 
 	/**
 	 * Sets createdAt before insert
-	 * 
-	 * TODO: add listener before insert record to store createdby field.
 	 */
 	@PrePersist
 	public void setCreationDate() {
+		UserEntity userEntity = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		this.createdBy = this.updatedBy = userEntity.getId();
 		this.createdAt = this.updatedAt = LocalDateTime.now().atOffset(ZoneOffset.UTC).toLocalDateTime();
 	}
 
 	/**
 	 * Sets updatedAt before update
-	 * 
-	 * TODO: add listener before insert record to store updatedby field.
 	 */
 	@PreUpdate
 	public void setChangeDate() {
+		UserEntity userEntity = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		this.updatedBy = userEntity.getId();
 		this.updatedAt = LocalDateTime.now().atOffset(ZoneOffset.UTC).toLocalDateTime();
 	}
 }

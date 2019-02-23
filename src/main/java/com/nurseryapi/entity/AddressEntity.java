@@ -46,7 +46,7 @@ public class AddressEntity extends BaseEntity {
 	@NotNull(message = "Address email can't be null")
 	private String phoneNumber;
 
-	@Column(name = "address_location")
+	@Column(name = "address_location", columnDefinition = "POINT")
 	@NotNull(message = "Address location can't be null")
 	private Point location;
 }

@@ -1,7 +1,6 @@
 package com.nurseryapi.service.user.impl;
 
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,9 +15,11 @@ import com.nurseryapi.entity.user.ParentUserEntity;
 import com.nurseryapi.entity.user.RoleEntity;
 import com.nurseryapi.entity.user.TeacherUserEntity;
 import com.nurseryapi.entity.user.UserEntity;
+import com.nurseryapi.exception.NoSuchElementFoundException;
+import com.nurseryapi.exception.NotAuthorizedException;
 import com.nurseryapi.model.constatnt.UserType;
 import com.nurseryapi.model.request.UserRegistrationRequest;
-import com.nurseryapi.repository.UserRepository;
+import com.nurseryapi.repository.user.UserRepository;
 import com.nurseryapi.service.user.RoleService;
 import com.nurseryapi.service.user.UserService;
 import com.nurseryapi.utils.Mapper;
@@ -67,6 +68,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return userRepository.saveAndFlush(userEntity);
 	}
 
+	@Override
+	public UserEntity getUser(long userId) {
+		return userRepository.findById(userId).orElseThrow(NoSuchElementFoundException::new);
+	}
+
 	/*
 	 * @see
 	 * com.nurseryapi.service.user.UserService#create(com.nurseryapi.model.request.
@@ -111,16 +117,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		switch (userRegistrationRequest.getUserType()) {
 		case ADMIN:
 			if (adminUser == null) {
-				// TODO: update the exception
-				throw new RuntimeException();
+				throw new NotAuthorizedException();
 			}
 			userEntity = Mapper.map(userRegistrationRequest, AdminUserEntity.class);
 			userEntity.setUserType(UserType.ADMIN);
 			break;
 		case OWNER:
 			if (adminUser == null) {
-				// TODO: update the exception
-				throw new RuntimeException();
+				throw new NotAuthorizedException();
 			}
 			userEntity = Mapper.map(userRegistrationRequest, OwnerUserEntity.class);
 			userEntity.setUserType(UserType.OWNER);
@@ -134,7 +138,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			userEntity.setUserType(UserType.TEACHER);
 			break;
 		default:
-			throw new NoSuchElementException();
+			throw new NoSuchElementFoundException();
 		}
 		return userEntity;
 	}

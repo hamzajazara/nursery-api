@@ -1,4 +1,4 @@
-package com.nurseryapi.repository;
+package com.nurseryapi.repository.user;
 
 import java.util.Optional;
 

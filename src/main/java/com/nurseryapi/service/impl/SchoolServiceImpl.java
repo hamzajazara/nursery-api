@@ -2,15 +2,18 @@ package com.nurseryapi.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nurseryapi.entity.AddressEntity;
 import com.nurseryapi.entity.SchoolEntity;
 import com.nurseryapi.entity.user.AdminUserEntity;
+import com.nurseryapi.entity.user.OwnerUserEntity;
+import com.nurseryapi.exception.NoSuchElementFoundException;
 import com.nurseryapi.model.request.SchoolRegistrationRequest;
 import com.nurseryapi.repository.SchoolRepository;
 import com.nurseryapi.service.AddressService;
 import com.nurseryapi.service.SchoolService;
-import com.nurseryapi.utils.Mapper;
+import com.nurseryapi.service.user.OwnerUserService;
 
 /**
  * 
@@ -25,6 +28,9 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Autowired
 	private AddressService addressService;
+
+	@Autowired
+	private OwnerUserService ownerUserService;
 
 	/*
 	 * @see
@@ -41,10 +47,15 @@ public class SchoolServiceImpl implements SchoolService {
 	 * SchoolRegistrationRequest, com.nurseryapi.entity.user.AdminUserEntity)
 	 */
 	@Override
+	@Transactional
 	public SchoolEntity register(SchoolRegistrationRequest schoolRegistrationRequest, AdminUserEntity adminUser) {
-		SchoolEntity schoolEntity = Mapper.map(schoolRegistrationRequest, SchoolEntity.class);
+		SchoolEntity schoolEntity = new SchoolEntity();
 		AddressEntity address = addressService.create(schoolRegistrationRequest.getAddress(), adminUser);
+		OwnerUserEntity userEntity = ownerUserService.getOwnerUser(schoolRegistrationRequest.getOwnerId())
+				.orElseThrow(NoSuchElementFoundException::new);
+		schoolEntity.setOwner(userEntity);
 		schoolEntity.setAddress(address);
-		return schoolEntity;
+		schoolEntity.setName(schoolRegistrationRequest.getSchoolName());
+		return save(schoolEntity);
 	}
 }
