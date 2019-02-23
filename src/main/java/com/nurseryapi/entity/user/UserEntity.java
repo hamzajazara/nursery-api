@@ -41,7 +41,7 @@ import lombok.Setter;
  *
  */
 @Entity(name = "User")
-@Table(name = "user")
+@Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Setter
 @Getter

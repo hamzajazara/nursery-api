@@ -6,32 +6,32 @@
 
 	<changeSet author="Hamza Aljazara" id="1">
 		<insert tableName="roles">
-			<column name="roles_id" value="1" />
-			<column name="roles_name" value="ADMIN" />
+			<column name="role_id" value="1" />
+			<column name="role_name" value="ADMIN" />
 			<column name="created_by" value="0" />
 			<column name="created_at" valueDate="now()" />
 			<column name="updated_by" value="0" />
 			<column name="updated_at" valueDate="now()" />
 		</insert>
 		<insert tableName="roles">
-			<column name="roles_id" value="2" />
-			<column name="roles_name" value="OWNER" />
+			<column name="role_id" value="2" />
+			<column name="role_name" value="OWNER" />
 			<column name="created_by" value="0" />
 			<column name="created_at" valueDate="now()" />
 			<column name="updated_by" value="0" />
 			<column name="updated_at" valueDate="now()" />
 		</insert>
 		<insert tableName="roles">
-			<column name="roles_id" value="3" />
-			<column name="roles_name" value="TEACHER" />
+			<column name="role_id" value="3" />
+			<column name="role_name" value="TEACHER" />
 			<column name="created_by" value="0" />
 			<column name="created_at" valueDate="now()" />
 			<column name="updated_by" value="0" />
 			<column name="updated_at" valueDate="now()" />
 		</insert>
 		<insert tableName="roles">
-			<column name="roles_id" value="4" />
-			<column name="roles_name" value="PARENT" />
+			<column name="role_id" value="4" />
+			<column name="role_name" value="PARENT" />
 			<column name="created_by" value="0" />
 			<column name="created_at" valueDate="now()" />
 			<column name="updated_by" value="0" />

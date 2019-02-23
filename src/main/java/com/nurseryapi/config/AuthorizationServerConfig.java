@@ -30,6 +30,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private DataSource dataSource;
 
+	/*
+	 * @see org.springframework.security.oauth2.config.annotation.web.configuration.
+	 * AuthorizationServerConfigurerAdapter#configure(org.springframework.security.
+	 * oauth2.config.annotation.web.configurers.
+	 * AuthorizationServerEndpointsConfigurer)
+	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.authenticationManager(authenticationManager);
@@ -37,21 +43,40 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		endpoints.tokenStore(tokenStore());
 	}
 
+	/*
+	 * @see org.springframework.security.oauth2.config.annotation.web.configuration.
+	 * AuthorizationServerConfigurerAdapter#configure(org.springframework.security.
+	 * oauth2.config.annotation.web.configurers.
+	 * AuthorizationServerSecurityConfigurer)
+	 */
 	@Override
 	public void configure(final AuthorizationServerSecurityConfigurer security) throws Exception {
 		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
 	}
 
+	/*
+	 * @see org.springframework.security.oauth2.config.annotation.web.configuration.
+	 * AuthorizationServerConfigurerAdapter#configure(org.springframework.security.
+	 * oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer)
+	 */
 	@Override
 	public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.jdbc(dataSource);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	@Bean
 	public TokenStore tokenStore() {
 		return new JdbcTokenStore(dataSource);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

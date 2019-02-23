@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nurseryapi.entity.user.UserEntity;
 import com.nurseryapi.model.request.UserRegistrationRequest;
 import com.nurseryapi.model.response.user.UserInfoResponse;
-import com.nurseryapi.service.UserService;
+import com.nurseryapi.service.user.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,8 +48,8 @@ public class UserController {
 	 * @return
 	 * @throws IOException
 	 */
-	@ApiOperation(value = "Logout")
-	@DeleteMapping("logout")
+	@ApiOperation(value = "Revoke user token")
+	@DeleteMapping("oauth/revoke")
 	public ResponseEntity<HttpStatus> logout() throws IOException {
 		OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getDetails();
@@ -62,11 +62,12 @@ public class UserController {
 	 * @param userRegistrationRequest
 	 * @return
 	 */
-	@PostMapping("register")
+	@PostMapping("/api/user/register")
 	@ApiOperation(value = "User Registration")
-	public ResponseEntity<?> register(@Valid @RequestBody UserRegistrationRequest userRegistrationRequest) {
-		userService.create(userRegistrationRequest);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	public ResponseEntity<UserInfoResponse> register(
+			@Valid @RequestBody UserRegistrationRequest userRegistrationRequest) {
+		return new ResponseEntity<>(new UserInfoResponse(userService.create(userRegistrationRequest)),
+				HttpStatus.CREATED);
 	}
 
 	/**
@@ -74,7 +75,7 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@GetMapping("/api/who-am-i")
+	@GetMapping("/api/user/who-am-i")
 	@ApiOperation(value = "Who Am I")
 	public ResponseEntity<UserInfoResponse> whoAmI(@AuthenticationPrincipal UserEntity user) {
 		if (user == null) {

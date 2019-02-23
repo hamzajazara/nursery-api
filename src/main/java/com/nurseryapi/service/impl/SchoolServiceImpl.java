@@ -1,11 +1,11 @@
 package com.nurseryapi.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nurseryapi.entity.user.RoleEntity;
-import com.nurseryapi.repository.RoleRepository;
-import com.nurseryapi.service.RoleService;
+import com.nurseryapi.entity.SchoolEntity;
+import com.nurseryapi.entity.user.AdminUserEntity;
+import com.nurseryapi.model.request.SchoolRegistrationRequest;
+import com.nurseryapi.service.SchoolService;
 
 /**
  * 
@@ -13,13 +13,17 @@ import com.nurseryapi.service.RoleService;
  *
  */
 @Service
-public class RoleServiceImpl implements RoleService {
-
-	@Autowired
-	private RoleRepository roleRepository;
+public class SchoolServiceImpl implements SchoolService {
 
 	@Override
-	public RoleEntity getRole(long roleId) {
-		return roleRepository.findById(roleId).get();
+	public SchoolEntity save(SchoolEntity school) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SchoolEntity create(SchoolRegistrationRequest schoolRegistrationRequest, AdminUserEntity adminUser) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

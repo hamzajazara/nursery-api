@@ -1,5 +1,6 @@
-package com.nurseryapi.service;
+package com.nurseryapi.service.user;
 
+import com.nurseryapi.entity.user.AdminUserEntity;
 import com.nurseryapi.entity.user.UserEntity;
 import com.nurseryapi.model.request.UserRegistrationRequest;
 
@@ -27,7 +28,16 @@ public interface UserService {
 	/**
 	 * 
 	 * @param userRegistrationRequest
+	 * @param adminUser
 	 * @return
 	 */
-	UserEntity userFactory(UserRegistrationRequest userRegistrationRequest);
+	UserEntity create(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser);
+
+	/**
+	 * 
+	 * @param userRegistrationRequest
+	 * @param adminUser
+	 * @return
+	 */
+	UserEntity userFactory(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser);
 }

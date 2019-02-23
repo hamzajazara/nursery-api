@@ -13,7 +13,7 @@ import lombok.Setter;
  *
  */
 @Entity(name = "TeacherUser")
-@Table(name = "teacher_user")
+@Table(name = "teacher_users")
 @DiscriminatorValue("TEACHER")
 @Setter
 @Getter

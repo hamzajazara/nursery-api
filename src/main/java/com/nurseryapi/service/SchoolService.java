@@ -1,18 +1,29 @@
 package com.nurseryapi.service;
 
-import com.nurseryapi.entity.user.RoleEntity;
+import com.nurseryapi.entity.SchoolEntity;
+import com.nurseryapi.entity.user.AdminUserEntity;
+import com.nurseryapi.model.request.SchoolRegistrationRequest;
 
 /**
  * 
  * @author Hamza Aljazara
  *
  */
-public interface RoleService {
+public interface SchoolService {
 
 	/**
 	 * 
-	 * @param roleId
+	 * @param school
 	 * @return
 	 */
-	RoleEntity getRole(long roleId);
+	SchoolEntity save(SchoolEntity school);
+
+	/**
+	 * 
+	 * @param schoolRegistrationRequest
+	 * @param adminUser
+	 * @return
+	 */
+	SchoolEntity create(SchoolRegistrationRequest schoolRegistrationRequest, AdminUserEntity adminUser);
+
 }

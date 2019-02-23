@@ -7,6 +7,12 @@ public class Mapper {
 	private Mapper() {
 	}
 
+	/**
+	 * 
+	 * @param source
+	 * @param target
+	 * @return
+	 */
 	public static <T> T map(Object source, Class<T> target) {
 		if (source == null || target == null)
 			return null;
@@ -20,7 +26,15 @@ public class Mapper {
 		}
 	}
 
+	/**
+	 * 
+	 * @param source
+	 * @param target
+	 */
 	public static <T> void map(Object source, T target) {
+		if (source == null || target == null)
+			return;
+
 		BeanUtils.copyProperties(source, target);
 	}
 }

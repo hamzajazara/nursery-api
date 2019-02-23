@@ -15,13 +15,24 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private TokenStore tokenStore;
 
+	/*
+	 * @see org.springframework.security.oauth2.config.annotation.web.configuration.
+	 * ResourceServerConfigurerAdapter#configure(org.springframework.security.oauth2
+	 * .config.annotation.web.configurers.ResourceServerSecurityConfigurer)
+	 */
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) {
 		resources.resourceId("principal").tokenStore(tokenStore);
 	}
 
+	/*
+	 * @see org.springframework.security.oauth2.config.annotation.web.configuration.
+	 * ResourceServerConfigurerAdapter#configure(org.springframework.security.config
+	 * .annotation.web.builders.HttpSecurity)
+	 */
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/api/users/register").permitAll().and().authorizeRequests().antMatchers("/api/**").authenticated();
+		http.authorizeRequests().antMatchers("/").permitAll().and().authorizeRequests().antMatchers("/api/**")
+				.authenticated();
 	}
 }

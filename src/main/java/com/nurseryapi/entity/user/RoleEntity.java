@@ -34,10 +34,10 @@ public class RoleEntity extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "roles_id")
+	@Column(name = "role_id")
 	private long id;
 
-	@Column(name = "roles_name", nullable = false, unique = true)
+	@Column(name = "role_name", nullable = false, unique = true)
 	@NotNull(message = "Role name can't be null")
 	@NotBlank(message = "Role name can't be blank")
 	private String name;

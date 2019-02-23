@@ -20,7 +20,7 @@ import lombok.Setter;
  *
  */
 @Entity(name = "Address")
-@Table(name = "address")
+@Table(name = "addresses")
 @Setter
 @Getter
 public class AddressEntity extends BaseEntity {

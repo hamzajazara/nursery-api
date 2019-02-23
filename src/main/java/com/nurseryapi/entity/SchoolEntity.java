@@ -25,7 +25,7 @@ import lombok.Setter;
  *
  */
 @Entity(name = "School")
-@Table(name = "school")
+@Table(name = "schools")
 @Setter
 @Getter
 public class SchoolEntity extends BaseEntity {

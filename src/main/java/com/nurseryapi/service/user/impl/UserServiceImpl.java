@@ -1,6 +1,6 @@
-package com.nurseryapi.service.impl;
+package com.nurseryapi.service.user.impl;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ import com.nurseryapi.entity.user.UserEntity;
 import com.nurseryapi.model.constatnt.UserType;
 import com.nurseryapi.model.request.UserRegistrationRequest;
 import com.nurseryapi.repository.UserRepository;
-import com.nurseryapi.service.RoleService;
-import com.nurseryapi.service.UserService;
+import com.nurseryapi.service.user.RoleService;
+import com.nurseryapi.service.user.UserService;
 import com.nurseryapi.utils.Mapper;
 
 /**
@@ -40,39 +40,75 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	/*
+	 * @see org.springframework.security.core.userdetails.UserDetailsService#
+	 * loadUserByUsername(java.lang.String)
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		return userRepository.findByEmail(email).get();
 	}
 
+	/*
+	 * @see com.nurseryapi.service.user.UserService#save(com.nurseryapi.entity.user.
+	 * UserEntity)
+	 */
 	@Override
 	public UserEntity save(UserEntity userEntity) {
 		return userRepository.saveAndFlush(userEntity);
 	}
 
+	/*
+	 * @see
+	 * com.nurseryapi.service.user.UserService#create(com.nurseryapi.model.request.
+	 * UserRegistrationRequest)
+	 */
 	@Override
 	public UserEntity create(UserRegistrationRequest userRegistrationRequest) {
-		UserEntity userEntity = userFactory(userRegistrationRequest);
+		return create(userRegistrationRequest, null);
+	}
 
-		RoleEntity roleEntity = roleService.getRole(userRegistrationRequest.getUserType().getValue());
-		ArrayList<RoleEntity> roles = new ArrayList<>();
-		roles.add(roleEntity);
+	/*
+	 * @see
+	 * com.nurseryapi.service.user.UserService#create(com.nurseryapi.model.request.
+	 * UserRegistrationRequest, com.nurseryapi.entity.user.AdminUserEntity)
+	 */
+	@Override
+	public UserEntity create(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser) {
+		UserEntity userEntity = userFactory(userRegistrationRequest, adminUser);
 		userEntity.setPassword(passwordEncoder.encode(userRegistrationRequest.getPassword()));
-		userEntity.setRoles(roles);
 		userEntity.setEnabled(true);
 		userEntity.setVerified(true);
+
+		// user role
+		RoleEntity roleEntity = roleService.getRole(userRegistrationRequest.getUserType().getValue());
+		userEntity.setRoles(Arrays.asList(roleEntity));
+
 		return save(userEntity);
 	}
 
+	/*
+	 * @see
+	 * com.nurseryapi.service.user.UserService#userFactory(com.nurseryapi.model.
+	 * request.UserRegistrationRequest, com.nurseryapi.entity.user.AdminUserEntity)
+	 */
 	@Override
-	public UserEntity userFactory(UserRegistrationRequest userRegistrationRequest) {
+	public UserEntity userFactory(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser) {
 		UserEntity userEntity;
 		switch (userRegistrationRequest.getUserType()) {
 		case ADMIN:
+			if (adminUser == null) {
+				// TODO: update the exception
+				throw new RuntimeException();
+			}
 			userEntity = Mapper.map(userRegistrationRequest, AdminUserEntity.class);
 			userEntity.setUserType(UserType.ADMIN);
 			break;
 		case OWNER:
+			if (adminUser == null) {
+				// TODO: update the exception
+				throw new RuntimeException();
+			}
 			userEntity = Mapper.map(userRegistrationRequest, OwnerUserEntity.class);
 			userEntity.setUserType(UserType.OWNER);
 			break;

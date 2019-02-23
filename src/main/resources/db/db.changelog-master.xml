@@ -8,7 +8,8 @@
 	<include file="classpath:/db/changelog/db.changelog-oauth.xml" />
 
 	<!-- Seed -->
-	<include file="classpath:/db/seed/db.seed.oauth-clients.xml" />
-	<include file="classpath:/db/seed/db.seed.user-roles.xml" />
+	<include file="classpath:/db/seed/db.seed.oauth-client.xml" />
+	<include file="classpath:/db/seed/db.seed.user-role.xml" />
+	<include file="classpath:/db/seed/db.seed.user-admin.xml" />
 	
 </databaseChangeLog>
