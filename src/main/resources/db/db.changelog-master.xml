@@ -10,6 +10,6 @@
 	<!-- Seed -->
 	<include file="classpath:/db/seed/db.seed.oauth-client.xml" />
 	<include file="classpath:/db/seed/db.seed.user-role.xml" />
-	<include file="classpath:/db/seed/db.seed.user-admin.xml" />
+	<include file="classpath:/db/seed/db.seed.users.xml" />
 	
 </databaseChangeLog>

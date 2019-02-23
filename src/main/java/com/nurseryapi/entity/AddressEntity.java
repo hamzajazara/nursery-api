@@ -32,10 +32,10 @@ public class AddressEntity extends BaseEntity {
 	@Column(name = "address_id")
 	private long id;
 
-	@Column(name = "address_name", nullable = false)
+	@Column(name = "address_location_name", nullable = false)
 	@NotNull(message = "Address name can't be null")
 	@NotBlank(message = "Address name can't be blank")
-	private String name;
+	private String locationName;
 
 	@Column(name = "address_email", nullable = false, unique = true)
 	@NotNull(message = "Address email can't be null")

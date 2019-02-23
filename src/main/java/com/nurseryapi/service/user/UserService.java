@@ -20,6 +20,13 @@ public interface UserService {
 
 	/**
 	 * 
+	 * @param email
+	 * @return
+	 */
+	boolean isUserExist(String email);
+
+	/**
+	 * 
 	 * @param userRegistrationRequest
 	 * @return
 	 */

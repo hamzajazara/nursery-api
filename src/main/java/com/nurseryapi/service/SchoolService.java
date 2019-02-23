@@ -24,6 +24,6 @@ public interface SchoolService {
 	 * @param adminUser
 	 * @return
 	 */
-	SchoolEntity create(SchoolRegistrationRequest schoolRegistrationRequest, AdminUserEntity adminUser);
+	SchoolEntity register(SchoolRegistrationRequest schoolRegistrationRequest, AdminUserEntity adminUser);
 
 }

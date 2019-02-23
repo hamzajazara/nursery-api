@@ -32,6 +32,10 @@ public class UserInfoResponse {
 
 	private List<String> roles;
 
+	/**
+	 * 
+	 * @param user
+	 */
 	public UserInfoResponse(UserEntity user) {
 		Mapper.map(user, this);
 		roles = new ArrayList<>();

@@ -50,6 +50,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	/*
+	 * @see org.springframework.security.core.userdetails.UserDetailsService#
+	 * loadUserByUsername(java.lang.String)
+	 */
+	@Override
+	public boolean isUserExist(String email) {
+		return userRepository.findByEmail(email).isPresent();
+	}
+
+	/*
 	 * @see com.nurseryapi.service.user.UserService#save(com.nurseryapi.entity.user.
 	 * UserEntity)
 	 */
@@ -75,6 +84,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	 */
 	@Override
 	public UserEntity create(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser) {
+		if (isUserExist(userRegistrationRequest.getEmail())) {
+			throw new RuntimeException();
+		}
+
 		UserEntity userEntity = userFactory(userRegistrationRequest, adminUser);
 		userEntity.setPassword(passwordEncoder.encode(userRegistrationRequest.getPassword()));
 		userEntity.setEnabled(true);
