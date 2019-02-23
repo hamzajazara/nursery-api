@@ -32,7 +32,7 @@ import io.swagger.annotations.ApiOperation;
  *
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 @Api(tags = "User")
 public class UserController {
 
@@ -49,7 +49,7 @@ public class UserController {
 	 * @throws IOException
 	 */
 	@ApiOperation(value = "Revoke user token")
-	@DeleteMapping("oauth/revoke")
+	@DeleteMapping("/logout")
 	public ResponseEntity<HttpStatus> logout() throws IOException {
 		OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getDetails();
@@ -62,7 +62,7 @@ public class UserController {
 	 * @param userRegistrationRequest
 	 * @return
 	 */
-	@PostMapping("/api/user/register")
+	@PostMapping("/user/register")
 	@ApiOperation(value = "User Registration")
 	public ResponseEntity<UserInfoResponse> register(
 			@Valid @RequestBody UserRegistrationRequest userRegistrationRequest) {
@@ -75,7 +75,7 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@GetMapping("/api/user/who-am-i")
+	@GetMapping("/user/who-am-i")
 	@ApiOperation(value = "Who Am I")
 	public ResponseEntity<UserInfoResponse> whoAmI(@AuthenticationPrincipal UserEntity user) {
 		if (user == null) {
