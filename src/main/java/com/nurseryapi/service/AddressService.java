@@ -25,4 +25,12 @@ public interface AddressService {
 	 * @return
 	 */
 	AddressEntity create(Address address, AdminUserEntity adminUser);
+
+	/**
+	 * 
+	 * @param schoolUpdateRequest
+	 * @param address
+	 * @return
+	 */
+	AddressEntity update(Address addressUpdateRequest, AddressEntity address);
 }

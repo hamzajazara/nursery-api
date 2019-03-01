@@ -12,6 +12,7 @@ import com.nurseryapi.entity.user.AdminUserEntity;
 import com.nurseryapi.entity.user.OwnerUserEntity;
 import com.nurseryapi.exception.NoSuchElementFoundException;
 import com.nurseryapi.model.request.SchoolRegistrationRequest;
+import com.nurseryapi.model.request.SchoolUpdateRequest;
 import com.nurseryapi.repository.SchoolRepository;
 import com.nurseryapi.service.AddressService;
 import com.nurseryapi.service.SchoolService;
@@ -63,6 +64,11 @@ public class SchoolServiceImpl implements SchoolService {
 		return schoolRepository.findByOwner(ownerUser, pageable);
 	}
 
+	@Override
+	public SchoolEntity getSchool(long schoolId) {
+		return schoolRepository.findById(schoolId).orElseThrow(NoSuchElementFoundException::new);
+	}
+
 	/*
 	 * @see com.nurseryapi.service.SchoolService#getSchool(long, long)
 	 */
@@ -96,5 +102,42 @@ public class SchoolServiceImpl implements SchoolService {
 		schoolEntity.setAddress(address);
 		schoolEntity.setName(schoolRegistrationRequest.getSchoolName());
 		return save(schoolEntity);
+	}
+
+	/*
+	 * @see com.nurseryapi.service.SchoolService#update(long,
+	 * com.nurseryapi.model.request.SchoolUpdateRequest)
+	 */
+	@Override
+	@Transactional
+	public SchoolEntity update(long schoolId, SchoolUpdateRequest schoolUpdateRequest, AdminUserEntity adminUser) {
+		SchoolEntity schoolEntity = getSchool(schoolId);
+		return update(schoolEntity, schoolUpdateRequest);
+	}
+
+	/*
+	 * @see com.nurseryapi.service.SchoolService#update(long,
+	 * com.nurseryapi.model.request.SchoolUpdateRequest)
+	 */
+	@Override
+	@Transactional
+	public SchoolEntity update(long schoolId, SchoolUpdateRequest schoolUpdateRequest, OwnerUserEntity ownerUser) {
+		SchoolEntity school = getSchool(schoolId, ownerUser);
+		return update(school, schoolUpdateRequest);
+	}
+
+	/*
+	 * @see com.nurseryapi.service.SchoolService#update(com.nurseryapi.entity.
+	 * SchoolEntity, com.nurseryapi.model.request.SchoolUpdateRequest)
+	 */
+	@Override
+	@Transactional
+	public SchoolEntity update(SchoolEntity school, SchoolUpdateRequest schoolUpdateRequest) {
+		school.setName(schoolUpdateRequest.getSchoolName());
+
+		if (schoolUpdateRequest.getAddress() != null) {
+			addressService.update(schoolUpdateRequest.getAddress(), school.getAddress());
+		}
+		return save(school);
 	}
 }

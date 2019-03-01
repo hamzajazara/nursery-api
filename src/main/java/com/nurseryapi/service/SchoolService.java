@@ -7,6 +7,7 @@ import com.nurseryapi.entity.SchoolEntity;
 import com.nurseryapi.entity.user.AdminUserEntity;
 import com.nurseryapi.entity.user.OwnerUserEntity;
 import com.nurseryapi.model.request.SchoolRegistrationRequest;
+import com.nurseryapi.model.request.SchoolUpdateRequest;
 
 /**
  * 
@@ -39,6 +40,13 @@ public interface SchoolService {
 
 	/**
 	 * 
+	 * @param schoolId
+	 * @return
+	 */
+	SchoolEntity getSchool(long schoolId);
+
+	/**
+	 * 
 	 * @param ownerId
 	 * @param schoolId
 	 * @return
@@ -61,4 +69,29 @@ public interface SchoolService {
 	 */
 	SchoolEntity register(SchoolRegistrationRequest schoolRegistrationRequest, AdminUserEntity adminUser);
 
+	/**
+	 * 
+	 * @param schoolId
+	 * @param schoolUpdateRequest
+	 * @param adminUser
+	 * @return
+	 */
+	SchoolEntity update(long schoolId, SchoolUpdateRequest schoolUpdateRequest, AdminUserEntity adminUser);
+
+	/**
+	 * 
+	 * @param schoolId
+	 * @param schoolUpdateRequest
+	 * @param ownerUser
+	 * @return
+	 */
+	SchoolEntity update(long schoolId, SchoolUpdateRequest schoolUpdateRequest, OwnerUserEntity ownerUser);
+
+	/**
+	 * 
+	 * @param school
+	 * @param schoolUpdateRequest
+	 * @return
+	 */
+	SchoolEntity update(SchoolEntity school, SchoolUpdateRequest schoolUpdateRequest);
 }

@@ -5,6 +5,7 @@
  ******************************************************************************/
 package com.nurseryapi.exception.handler;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -15,6 +16,7 @@ import javax.validation.ValidationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -24,7 +26,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.nurseryapi.exception.AbstractException;
-import com.nurseryapi.exception.NoSuchElementFoundException;
 
 /**
  * 
@@ -80,8 +81,25 @@ public class RestExceptionHandler {
 	@ExceptionHandler(NoSuchElementException.class)
 	protected ResponseEntity<ApiError> handleNoSuchElementException(Exception exception) {
 		log.error(exception.getMessage(), exception);
-		NoSuchElementFoundException ex = new NoSuchElementFoundException();
 		return new ResponseEntity<>(new ApiError(exception.getMessage()), HttpStatus.BAD_REQUEST);
+	}
+
+	/**
+	 * Handle duplicate entry
+	 *
+	 * @param exception
+	 * @return
+	 */
+	@ExceptionHandler({ DataIntegrityViolationException.class,
+			org.hibernate.exception.ConstraintViolationException.class,
+			SQLIntegrityConstraintViolationException.class })
+	protected ResponseEntity<ApiError> handleDuplicateException(
+			org.hibernate.exception.ConstraintViolationException exception) {
+		log.error(exception.getMessage(), exception);
+		SQLIntegrityConstraintViolationException sqlIntegrity = (SQLIntegrityConstraintViolationException) exception
+				.getCause();
+		String[] ex = sqlIntegrity.getMessage().split("'");
+		return new ResponseEntity<>(new ApiError(ex[0] + ex[1]), HttpStatus.BAD_REQUEST);
 	}
 
 	/**

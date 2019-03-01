@@ -42,4 +42,18 @@ public class AddressServiceImpl implements AddressService {
 		addressEntity.setLocation(PointUtils.create(address.getPoint()));
 		return save(addressEntity);
 	}
+
+	/*
+	 * @see
+	 * com.nurseryapi.service.AddressService#update(com.nurseryapi.model.request.
+	 * SchoolUpdateRequest, com.nurseryapi.entity.AddressEntity)
+	 */
+	@Override
+	public AddressEntity update(Address addressUpdateRequest, AddressEntity address) {
+		address.setLocation(PointUtils.create(addressUpdateRequest.getPoint()));
+		address.setLocationName(addressUpdateRequest.getLocationName());
+		address.setEmail(addressUpdateRequest.getEmail());
+		address.setPhoneNumber(addressUpdateRequest.getPhoneNumber());
+		return save(address);
+	}
 }

@@ -16,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nurseryapi.entity.SchoolEntity;
 import com.nurseryapi.entity.user.AdminUserEntity;
 import com.nurseryapi.model.request.SchoolRegistrationRequest;
+import com.nurseryapi.model.request.SchoolUpdateRequest;
 import com.nurseryapi.model.response.SchoolResponse;
 import com.nurseryapi.service.SchoolService;
 
@@ -48,7 +50,7 @@ public class SchoolController {
 	 * @param userRegistrationRequest
 	 * @return
 	 */
-	@PostMapping("/register")
+	@PostMapping("/create")
 	@ApiOperation(value = "Allow to the admin to register owner school")
 	public ResponseEntity<SchoolResponse> register(
 			@Valid @RequestBody SchoolRegistrationRequest schoolRegistrationRequest,
@@ -64,14 +66,27 @@ public class SchoolController {
 	 * @param adminUser
 	 * @return
 	 */
-	@GetMapping("owner/{ownerId}")
-	@ApiOperation(value = "Allow to the admin to view owner schools")
-	public PageImpl<SchoolResponse> viewSchool(@PathVariable("ownerId") long ownerId, Pageable pageable,
+	@GetMapping("/{schoolId}")
+	@ApiOperation(value = "Allow to the admin to view school")
+	public ResponseEntity<SchoolResponse> viewSchool(@PathVariable("schoolId") long schoolId,
 			@AuthenticationPrincipal AdminUserEntity adminUser) {
-		Page<SchoolEntity> schools = schoolService.getSchool(ownerId, pageable);
-		List<SchoolResponse> schoolResponses = new ArrayList<>();
-		schools.forEach(school -> schoolResponses.add(new SchoolResponse(school)));
-		return new PageImpl<>(schoolResponses, pageable, schools.getTotalElements());
+		return new ResponseEntity<>(new SchoolResponse(schoolService.getSchool(schoolId)), HttpStatus.OK);
+	}
+
+	/**
+	 * 
+	 * @param schoolId
+	 * @param schoolUpdateRequest
+	 * @param adminUser
+	 * @return
+	 */
+	@PutMapping("/{schoolId}/update")
+	@ApiOperation(value = "Allow to the admin to update school info")
+	public ResponseEntity<SchoolResponse> updateSchool(@PathVariable("schoolId") long schoolId,
+			@Valid @RequestBody SchoolUpdateRequest schoolUpdateRequest,
+			@AuthenticationPrincipal AdminUserEntity adminUser) {
+		return new ResponseEntity<>(new SchoolResponse(schoolService.update(schoolId, schoolUpdateRequest, adminUser)),
+				HttpStatus.CREATED);
 	}
 
 	/**
@@ -81,10 +96,13 @@ public class SchoolController {
 	 * @param adminUser
 	 * @return
 	 */
-	@GetMapping("owner/{ownerId}/{schoolId}")
-	@ApiOperation(value = "Allow to the admin to view owner school")
-	public ResponseEntity<SchoolResponse> viewOwnerSchool(@PathVariable("schoolId") long schoolId,
-			@PathVariable("ownerId") long ownerId, @AuthenticationPrincipal AdminUserEntity adminUser) {
-		return new ResponseEntity<>(new SchoolResponse(schoolService.getSchool(schoolId, ownerId)), HttpStatus.OK);
+	@GetMapping("/owner/{ownerId}")
+	@ApiOperation(value = "Allow to the admin to view owner schools")
+	public PageImpl<SchoolResponse> viewSchool(@PathVariable("ownerId") long ownerId, Pageable pageable,
+			@AuthenticationPrincipal AdminUserEntity adminUser) {
+		Page<SchoolEntity> schools = schoolService.getSchool(ownerId, pageable);
+		List<SchoolResponse> schoolResponses = new ArrayList<>();
+		schools.forEach(school -> schoolResponses.add(new SchoolResponse(school)));
+		return new PageImpl<>(schoolResponses, pageable, schools.getTotalElements());
 	}
 }
