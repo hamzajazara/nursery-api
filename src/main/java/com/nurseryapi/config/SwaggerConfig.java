@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import springfox.documentation.builders.OAuthBuilder;
@@ -42,7 +43,7 @@ public class SwaggerConfig {
 				.apis(RequestHandlerSelectors.basePackage("com.nurseryapi.controller")).paths(PathSelectors.any())
 				.build().securitySchemes(Collections.singletonList(securitySchema()))
 				.securityContexts(Collections.singletonList(securityContext()))
-				.ignoredParameterTypes(AuthenticationPrincipal.class);
+				.ignoredParameterTypes(AuthenticationPrincipal.class, Pageable.class);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package com.nurseryapi.controller.owner;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +12,8 @@ import io.swagger.annotations.Api;
  *
  */
 @RestController("OwnerTeacherController")
-@RequestMapping("/api/owne")
+@RequestMapping("/api/owne/teacher")
 @Api(tags = "Owner/Teacher")
+@PreAuthorize("hasRole('ROLE_OWNER')")
 public class TeacherController {
 }

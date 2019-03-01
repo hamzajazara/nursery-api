@@ -1,6 +1,8 @@
 package com.nurseryapi.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +41,43 @@ public class SchoolServiceImpl implements SchoolService {
 	@Override
 	public SchoolEntity save(SchoolEntity school) {
 		return schoolRepository.saveAndFlush(school);
+	}
+
+	/*
+	 * @see
+	 * com.nurseryapi.service.SchoolService#getSchool(com.nurseryapi.entity.user.
+	 * OwnerUserEntity)
+	 */
+	@Override
+	public Page<SchoolEntity> getSchool(long ownerId, Pageable pageable) {
+		return schoolRepository.findByOwnerId(ownerId, pageable);
+	}
+
+	/*
+	 * @see
+	 * com.nurseryapi.service.SchoolService#getSchool(com.nurseryapi.entity.user.
+	 * OwnerUserEntity, org.springframework.data.domain.Pageable)
+	 */
+	@Override
+	public Page<SchoolEntity> getSchool(OwnerUserEntity ownerUser, Pageable pageable) {
+		return schoolRepository.findByOwner(ownerUser, pageable);
+	}
+
+	/*
+	 * @see com.nurseryapi.service.SchoolService#getSchool(long, long)
+	 */
+	@Override
+	public SchoolEntity getSchool(long schoolId, long ownerId) {
+		return schoolRepository.findByIdAndOwnerId(schoolId, ownerId).orElseThrow(NoSuchElementFoundException::new);
+	}
+
+	/*
+	 * @see com.nurseryapi.service.SchoolService#getSchool(long,
+	 * com.nurseryapi.entity.user.OwnerUserEntity)
+	 */
+	@Override
+	public SchoolEntity getSchool(long schoolId, OwnerUserEntity ownerUser) {
+		return schoolRepository.findByIdAndOwner(schoolId, ownerUser).orElseThrow(NoSuchElementFoundException::new);
 	}
 
 	/*
