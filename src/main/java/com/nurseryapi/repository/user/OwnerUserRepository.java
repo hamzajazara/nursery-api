@@ -1,7 +1,6 @@
 package com.nurseryapi.repository.user;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import javax.transaction.Transactional;
 
 import com.nurseryapi.entity.user.OwnerUserEntity;
 
@@ -10,6 +9,6 @@ import com.nurseryapi.entity.user.OwnerUserEntity;
  * @author Hamza Aljazara
  *
  */
-@Repository
-public interface OwnerUserRepository extends JpaRepository<OwnerUserEntity, Long> {
+@Transactional
+public interface OwnerUserRepository extends UserBaseRepository<OwnerUserEntity> {
 }

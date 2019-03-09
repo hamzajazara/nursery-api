@@ -30,7 +30,7 @@ import com.nurseryapi.utils.Mapper;
  *
  */
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl<T extends UserEntity> implements UserService<UserEntity>, UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;

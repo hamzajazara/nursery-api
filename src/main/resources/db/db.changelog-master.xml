@@ -5,11 +5,12 @@
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
 	<!-- Change Log -->
+	<include file="classpath:/db/changelog/db.changelog-init.xml" />
 	<include file="classpath:/db/changelog/db.changelog-oauth.xml" />
 
 	<!-- Seed -->
 	<include file="classpath:/db/seed/db.seed.oauth-client.xml" />
 	<include file="classpath:/db/seed/db.seed.user-role.xml" />
 	<include file="classpath:/db/seed/db.seed.users.xml" />
-	
+
 </databaseChangeLog>

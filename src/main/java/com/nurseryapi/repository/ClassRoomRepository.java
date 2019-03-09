@@ -1,0 +1,15 @@
+package com.nurseryapi.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.nurseryapi.entity.ClassRoomEntity;
+
+/**
+ * 
+ * @author Hamza Aljazara
+ *
+ */
+@Repository
+public interface ClassRoomRepository extends JpaRepository<ClassRoomEntity, Long> {
+}

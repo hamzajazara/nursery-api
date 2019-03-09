@@ -1,9 +1,6 @@
 package com.nurseryapi.repository.user;
 
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import javax.transaction.Transactional;
 
 import com.nurseryapi.entity.user.UserEntity;
 
@@ -12,19 +9,6 @@ import com.nurseryapi.entity.user.UserEntity;
  * @author Hamza Aljazara
  *
  */
-@Repository
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
-	/**
-	 * 
-	 * @param email
-	 * @return
-	 */
-	Optional<UserEntity> findByUsername(String email);
-
-	/**
-	 * 
-	 * @param email
-	 * @return
-	 */
-	Optional<UserEntity> findByEmail(String email);
+@Transactional
+public interface UserRepository extends UserBaseRepository<UserEntity> {
 }

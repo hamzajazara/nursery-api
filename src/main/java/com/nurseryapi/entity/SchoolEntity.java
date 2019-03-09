@@ -1,5 +1,7 @@
 package com.nurseryapi.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -46,6 +49,9 @@ public class SchoolEntity extends BaseEntity {
 	@JoinColumn(name = "address_id", nullable = false, foreignKey = @ForeignKey(name = "fk_school_address_id"))
 	@NotNull(message = "Address can't be null")
 	private AddressEntity address;
+
+	@OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<ClassRoomEntity> classRooms;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "owner_user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_school_owner_user_id"))

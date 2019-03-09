@@ -9,14 +9,14 @@ import com.nurseryapi.model.request.UserRegistrationRequest;
  * @author Hamza Aljazara
  *
  */
-public interface UserService {
+public interface UserService<T extends UserEntity> {
 
 	/**
 	 * 
 	 * @param userEntity
 	 * @return
 	 */
-	UserEntity save(UserEntity userEntity);
+	T save(T userEntity);
 
 	/**
 	 * 
@@ -30,7 +30,7 @@ public interface UserService {
 	 * @param userRegistrationRequest
 	 * @return
 	 */
-	UserEntity create(UserRegistrationRequest userRegistrationRequest);
+	T create(UserRegistrationRequest userRegistrationRequest);
 
 	/**
 	 * 
@@ -38,14 +38,14 @@ public interface UserService {
 	 * @param adminUser
 	 * @return
 	 */
-	UserEntity create(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser);
+	T create(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser);
 
 	/**
 	 * 
 	 * @param ownerId
 	 * @return
 	 */
-	UserEntity getUser(long userId);
+	T getUser(long userId);
 
 	/**
 	 * 
@@ -53,5 +53,5 @@ public interface UserService {
 	 * @param adminUser
 	 * @return
 	 */
-	UserEntity userFactory(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser);
+	T userFactory(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser);
 }

@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet author="Hamza Aljazara" id="1">
+		<createTable tableName="addresses">
+			<column autoIncrement="true" name="address_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="address_email" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="address_location" type="POINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="address_location_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="address_phone_number" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="2">
+		<createTable tableName="admin_users">
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="3">
+		<createTable tableName="class_rooms">
+			<column autoIncrement="true" name="class_room_id"
+				type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="class_room_capacity" type="BIGINT" />
+			<column name="class_room_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="grade_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="school_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="4">
+		<createTable tableName="class_topic_times">
+			<column autoIncrement="true" name="class_topic_time_id"
+				type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="class_topic_time_from" type="datetime(6)">
+				<constraints nullable="false" />
+			</column>
+			<column name="class_topic_time_to" type="datetime(6)">
+				<constraints nullable="false" />
+			</column>
+			<column name="class_room_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="topic_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="5">
+		<createTable tableName="grades">
+			<column autoIncrement="true" name="grade_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="grade_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="6">
+		<createTable tableName="owner_users">
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="7">
+		<createTable tableName="parent_users">
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="8">
+		<createTable tableName="roles">
+			<column autoIncrement="true" name="role_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="role_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="9">
+		<createTable tableName="schools">
+			<column autoIncrement="true" name="school_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="school_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="address_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="owner_user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="10">
+		<createTable tableName="student_users">
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="11">
+		<createTable tableName="students_class_rooms">
+			<column name="student_user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="class_room_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="12">
+		<createTable tableName="teacher_users">
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="school_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="13">
+		<createTable tableName="teachers_topics">
+			<column name="teacher_user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="topic_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="14">
+		<createTable tableName="topics">
+			<column autoIncrement="true" name="topic_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="topic_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="15">
+		<createTable tableName="user_roles">
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_role_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="16">
+		<createTable tableName="users">
+			<column autoIncrement="true" name="user_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="user_email" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_enabled" type="BIT(1)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_first_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_last_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_national_id" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_password" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_phone_number" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_type" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_verified" type="BIT(1)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="17">
+		<addPrimaryKey columnNames="user_id"
+			constraintName="PRIMARY" tableName="admin_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="18">
+		<addPrimaryKey columnNames="user_id"
+			constraintName="PRIMARY" tableName="owner_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="19">
+		<addPrimaryKey columnNames="user_id"
+			constraintName="PRIMARY" tableName="parent_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="20">
+		<addPrimaryKey columnNames="user_id"
+			constraintName="PRIMARY" tableName="student_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="21">
+		<addPrimaryKey columnNames="user_id"
+			constraintName="PRIMARY" tableName="teacher_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="22">
+		<addUniqueConstraint columnNames="user_email"
+			constraintName="UK_33uo7vet9c79ydfuwg1w848f" tableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="23">
+		<addUniqueConstraint columnNames="role_name"
+			constraintName="UK_716hgxp60ym1lifrdgp67xt5k" tableName="roles" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="24">
+		<addUniqueConstraint
+			columnNames="user_national_id"
+			constraintName="UK_aisybtf0v5bm5859974bfbiwf" tableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="25">
+		<addUniqueConstraint columnNames="address_email"
+			constraintName="UK_e7v087lk0jviglvm95tdutb5j" tableName="addresses" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="26">
+		<addUniqueConstraint
+			columnNames="class_topic_time_to"
+			constraintName="UK_jl7oxu8ye6h4l14mohifhlmkb"
+			tableName="class_topic_times" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="27">
+		<addUniqueConstraint columnNames="user_name"
+			constraintName="UK_k8d0f2n7n88w1a16yhua64onx" tableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="28">
+		<addUniqueConstraint
+			columnNames="class_topic_time_from"
+			constraintName="UK_okygve1oryluhv9psmyd4kh1j"
+			tableName="class_topic_times" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="29">
+		<createIndex indexName="FK3yrbapn5xf5yivq7wrivj2gmj"
+			tableName="teachers_topics">
+			<column name="topic_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="30">
+		<createIndex indexName="FK6hqnfkpvb1nfafc2gvdx5815e"
+			tableName="teachers_topics">
+			<column name="teacher_user_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="31">
+		<createIndex indexName="FK6ry20bmk7erblwt7mfnqbmp30"
+			tableName="students_class_rooms">
+			<column name="student_user_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="32">
+		<createIndex indexName="FKgc8ivfl9rbj8vpcyqoilkvhnr"
+			tableName="students_class_rooms">
+			<column name="class_room_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="33">
+		<createIndex indexName="fk_class_room_grade_id"
+			tableName="class_rooms">
+			<column name="grade_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="34">
+		<createIndex indexName="fk_class_room_school_id"
+			tableName="class_rooms">
+			<column name="school_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="35">
+		<createIndex indexName="fk_class_room_user_id"
+			tableName="class_rooms">
+			<column name="user_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="36">
+		<createIndex indexName="fk_class_topic_time_class_room_id"
+			tableName="class_topic_times">
+			<column name="class_room_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="37">
+		<createIndex indexName="fk_class_topic_time_topic_id"
+			tableName="class_topic_times">
+			<column name="topic_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="38">
+		<createIndex indexName="fk_school_address_id"
+			tableName="schools">
+			<column name="address_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="39">
+		<createIndex indexName="fk_school_owner_user_id"
+			tableName="schools">
+			<column name="owner_user_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="40">
+		<createIndex indexName="fk_teacher_user_school_id"
+			tableName="teacher_users">
+			<column name="school_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="41">
+		<createIndex indexName="fk_user_roles_role_id"
+			tableName="user_roles">
+			<column name="user_role_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="42">
+		<createIndex indexName="fk_user_roles_user_id"
+			tableName="user_roles">
+			<column name="user_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="43">
+		<addForeignKeyConstraint
+			baseColumnNames="topic_id" baseTableName="teachers_topics"
+			constraintName="FK3yrbapn5xf5yivq7wrivj2gmj" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="topic_id" referencedTableName="topics" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="44">
+		<addForeignKeyConstraint
+			baseColumnNames="user_id" baseTableName="teacher_users"
+			constraintName="FK6c6b81ecbidg7s915ego39sjv" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="45">
+		<addForeignKeyConstraint
+			baseColumnNames="teacher_user_id" baseTableName="teachers_topics"
+			constraintName="FK6hqnfkpvb1nfafc2gvdx5815e" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="teacher_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="46">
+		<addForeignKeyConstraint
+			baseColumnNames="student_user_id"
+			baseTableName="students_class_rooms"
+			constraintName="FK6ry20bmk7erblwt7mfnqbmp30" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="student_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="47">
+		<addForeignKeyConstraint
+			baseColumnNames="user_id" baseTableName="student_users"
+			constraintName="FK8fpudaa5mm06uf5rvb0mft2fe" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="48">
+		<addForeignKeyConstraint
+			baseColumnNames="user_id" baseTableName="owner_users"
+			constraintName="FK9u3i3d1i7daebhtvjlm0yfsua" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="49">
+		<addForeignKeyConstraint
+			baseColumnNames="class_room_id" baseTableName="students_class_rooms"
+			constraintName="FKgc8ivfl9rbj8vpcyqoilkvhnr" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="class_room_id"
+			referencedTableName="class_rooms" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="50">
+		<addForeignKeyConstraint
+			baseColumnNames="user_id" baseTableName="admin_users"
+			constraintName="FKnxke3qmphugkk619ghldnn9h2" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="51">
+		<addForeignKeyConstraint
+			baseColumnNames="user_id" baseTableName="parent_users"
+			constraintName="FKso5xba0r6f6pujenyivauitgf" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="52">
+		<addForeignKeyConstraint
+			baseColumnNames="grade_id" baseTableName="class_rooms"
+			constraintName="fk_class_room_grade_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="grade_id" referencedTableName="grades" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="53">
+		<addForeignKeyConstraint
+			baseColumnNames="school_id" baseTableName="class_rooms"
+			constraintName="fk_class_room_school_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="school_id" referencedTableName="schools" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="54">
+		<addForeignKeyConstraint
+			baseColumnNames="user_id" baseTableName="class_rooms"
+			constraintName="fk_class_room_user_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="teacher_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="55">
+		<addForeignKeyConstraint
+			baseColumnNames="class_room_id" baseTableName="class_topic_times"
+			constraintName="fk_class_topic_time_class_room_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="class_room_id"
+			referencedTableName="class_rooms" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="56">
+		<addForeignKeyConstraint
+			baseColumnNames="topic_id" baseTableName="class_topic_times"
+			constraintName="fk_class_topic_time_topic_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="topic_id" referencedTableName="topics" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="57">
+		<addForeignKeyConstraint
+			baseColumnNames="address_id" baseTableName="schools"
+			constraintName="fk_school_address_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="address_id" referencedTableName="addresses" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="58">
+		<addForeignKeyConstraint
+			baseColumnNames="owner_user_id" baseTableName="schools"
+			constraintName="fk_school_owner_user_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="owner_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="59">
+		<addForeignKeyConstraint
+			baseColumnNames="school_id" baseTableName="teacher_users"
+			constraintName="fk_teacher_user_school_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="school_id" referencedTableName="schools" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="60">
+		<addForeignKeyConstraint
+			baseColumnNames="user_role_id" baseTableName="user_roles"
+			constraintName="fk_user_roles_role_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="role_id" referencedTableName="roles" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="61">
+		<addForeignKeyConstraint
+			baseColumnNames="user_id" baseTableName="user_roles"
+			constraintName="fk_user_roles_user_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="users" />
+	</changeSet>
+</databaseChangeLog>
