@@ -39,21 +39,15 @@ public class ClassTopicTimeEntity extends BaseEntity {
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "class_room_id", nullable = false, foreignKey = @ForeignKey(name = "fk_class_topic_time_class_room_id"))
-	@NotNull(message = "Class room can't be null")
 	private ClassRoomEntity classRoom;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "topic_id", nullable = false, foreignKey = @ForeignKey(name = "fk_class_topic_time_topic_id"))
-	@NotNull(message = "Topic can't be null")
 	private TopicEntity topic;
 
 	@Column(name = "class_topic_time_from", nullable = false, unique = true)
-	@NotNull(message = "Class Topic Time can't be null")
-	@NotBlank(message = "Class Topic Time can't be blank")
 	private LocalDateTime from;
 
 	@Column(name = "class_topic_time_to", nullable = false, unique = true)
-	@NotNull(message = "Class Topic To can't be null")
-	@NotBlank(message = "Class Topic To can't be blank")
 	private LocalDateTime to;
 }

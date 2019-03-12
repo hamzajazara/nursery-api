@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +38,23 @@ public class TeacherController {
 
 	@Autowired
 	private TeacherService teacherService;
+
+	/**
+	 * 
+	 * @param schoolId
+	 * @param pageable
+	 * @param ownerUser
+	 * @return
+	 */
+	@PostMapping("/school/{schoolId}")
+	@ApiOperation(value = "Allow to the owner to view school teachers")
+	public PageImpl<TeacherUserResponse> registerTeacher(long schoolId, Pageable pageable,
+			@AuthenticationPrincipal OwnerUserEntity ownerUser) {
+		Page<TeacherUserEntity> teachers = teacherService.getTeacherUser(schoolId, ownerUser, pageable);
+		List<TeacherUserResponse> teacherResponses = new ArrayList<>();
+		teachers.forEach(teacher -> teacherResponses.add(new TeacherUserResponse(teacher)));
+		return new PageImpl<>(teacherResponses, pageable, teachers.getTotalElements());
+	}
 
 	/**
 	 * 

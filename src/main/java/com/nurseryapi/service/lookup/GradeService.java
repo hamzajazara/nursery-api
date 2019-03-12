@@ -1,9 +1,9 @@
-package com.nurseryapi.service;
+package com.nurseryapi.service.lookup;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.nurseryapi.entity.GradeEntity;
+import com.nurseryapi.entity.lookup.GradeEntity;
 
 /**
  * 

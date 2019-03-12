@@ -43,4 +43,12 @@ public class TeacherServiceImpl implements TeacherService {
 		SchoolEntity school = schoolService.getSchool(schoolId);
 		return teacherUserRepository.findAllBySchool(school, pageable);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.nurseryapi.service.user.TeacherService#registerTeacherUser(long, com.nurseryapi.entity.user.OwnerUserEntity)
+	 */
+	@Override
+	public TeacherUserEntity registerTeacherUser(long schoolId, OwnerUserEntity ownerUser) {
+		return null;
+	}
 }

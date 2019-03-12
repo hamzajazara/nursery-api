@@ -1,14 +1,14 @@
-package com.nurseryapi.service.impl;
+package com.nurseryapi.service.lookup.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.nurseryapi.entity.GradeEntity;
+import com.nurseryapi.entity.lookup.GradeEntity;
 import com.nurseryapi.exception.NoSuchElementFoundException;
-import com.nurseryapi.repository.GradeRepository;
-import com.nurseryapi.service.GradeService;
+import com.nurseryapi.repository.lookup.GradeRepository;
+import com.nurseryapi.service.lookup.GradeService;
 
 /**
  * 

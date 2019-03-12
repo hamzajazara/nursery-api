@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet author="Hamza Aljazara" id="1">
+		<createTable tableName="cities">
+			<column autoIncrement="true" name="city_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="city_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="city_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="country_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="2">
+		<createTable tableName="countries">
+			<column autoIncrement="true" name="country_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="country_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="country_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="3">
+		<createTable tableName="degrees">
+			<column autoIncrement="true" name="degree_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="degree_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="degree_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="4">
+		<createTable tableName="educations">
+			<column autoIncrement="true" name="education_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="education_graduation_date" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="education_institution_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="degree_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="grade_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="5">
+		<createTable tableName="follower_users">
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="6">
+		<createTable tableName="languages">
+			<column autoIncrement="true" name="language_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="language_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="language_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="7">
+		<createTable tableName="majors">
+			<column autoIncrement="true" name="major_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="major_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="major_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="8">
+		<createTable tableName="students_followers">
+			<column name="student_user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="follower_user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="9">
+		<addColumn tableName="teacher_users">
+			<column name="education_id" type="BIGINT(19)">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="10">
+		<addColumn tableName="grades">
+			<column name="grade_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="11">
+		<addColumn tableName="grades">
+			<column name="major_id" type="BIGINT(19)">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="12">
+		<addColumn tableName="class_rooms">
+			<column name="principal_teacher_user_id" type="BIGINT(19)">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="13">
+		<addColumn tableName="users">
+			<column name="user_username" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="14">
+		<addPrimaryKey columnNames="user_id"
+			constraintName="PRIMARY" tableName="follower_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="15">
+		<addUniqueConstraint columnNames="education_id"
+			constraintName="UK_4wwkv3fvhn8aetbutra883x96"
+			tableName="teacher_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="16">
+		<addUniqueConstraint columnNames="user_username"
+			constraintName="UK_bcy4eb602iyorjjc2cklf53cf" tableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="17">
+		<createIndex indexName="FKoohsg4dewss8kklfhse81hhg9"
+			tableName="students_followers">
+			<column name="follower_user_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="18">
+		<createIndex indexName="FKsesowvyodhc3nlqfj28cynvpx"
+			tableName="students_followers">
+			<column name="student_user_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="19">
+		<createIndex indexName="fk_city_country_id"
+			tableName="cities">
+			<column name="country_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="20">
+		<createIndex
+			indexName="fk_class_room_principal_teacher_user_id"
+			tableName="class_rooms">
+			<column name="principal_teacher_user_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="21">
+		<createIndex indexName="fk_education_degree_id"
+			tableName="educations">
+			<column name="degree_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="22">
+		<createIndex indexName="fk_education_grade_id"
+			tableName="educations">
+			<column name="grade_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="23">
+		<createIndex indexName="fk_major_major_id"
+			tableName="grades">
+			<column name="major_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="24">
+		<addForeignKeyConstraint
+			baseColumnNames="follower_user_id" baseTableName="students_followers"
+			constraintName="FKoohsg4dewss8kklfhse81hhg9" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="follower_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="25">
+		<addForeignKeyConstraint
+			baseColumnNames="user_id" baseTableName="follower_users"
+			constraintName="FKpx629jygbrxq7k3ltbyayt4qa" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="26">
+		<addForeignKeyConstraint
+			baseColumnNames="student_user_id" baseTableName="students_followers"
+			constraintName="FKsesowvyodhc3nlqfj28cynvpx" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="user_id" referencedTableName="student_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="27">
+		<addForeignKeyConstraint
+			baseColumnNames="country_id" baseTableName="cities"
+			constraintName="fk_city_country_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="country_id" referencedTableName="countries" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="28">
+		<addForeignKeyConstraint
+			baseColumnNames="principal_teacher_user_id"
+			baseTableName="class_rooms"
+			constraintName="fk_class_room_principal_teacher_user_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="user_id"
+			referencedTableName="teacher_users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="29">
+		<addForeignKeyConstraint
+			baseColumnNames="degree_id" baseTableName="educations"
+			constraintName="fk_education_degree_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="degree_id" referencedTableName="degrees" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="30">
+		<addForeignKeyConstraint
+			baseColumnNames="grade_id" baseTableName="educations"
+			constraintName="fk_education_grade_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="grade_id" referencedTableName="grades" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="31">
+		<addForeignKeyConstraint
+			baseColumnNames="major_id" baseTableName="grades"
+			constraintName="fk_major_major_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="major_id" referencedTableName="majors" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="32">
+		<dropForeignKeyConstraint
+			baseTableName="class_rooms" constraintName="fk_class_room_user_id" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="33">
+		<dropUniqueConstraint
+			constraintName="UK_k8d0f2n7n88w1a16yhua64onx" tableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="37">
+		<dropColumn columnName="user_id" tableName="class_rooms" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="38">
+		<dropColumn columnName="user_name" tableName="users" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="39">
+		<dropNotNullConstraint columnDataType="POINT"
+			columnName="address_location" tableName="addresses" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="40">
+		<dropNotNullConstraint
+			columnDataType="varchar(255)" columnName="user_phone_number"
+			tableName="users" />
+	</changeSet>
+</databaseChangeLog>
