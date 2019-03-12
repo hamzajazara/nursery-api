@@ -39,7 +39,7 @@ public class GradeLookupController {
 	 * @param pageable
 	 * @return
 	 */
-	@GetMapping("/")
+	@GetMapping
 	@ApiOperation(value = "Allow the user to view all grades")
 	public PageImpl<GradeResponse> viewGrades(Pageable pageable) {
 		Page<GradeEntity> grades = gradeService.getGrade(pageable);

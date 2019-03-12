@@ -39,7 +39,7 @@ public class DegreeLookupController {
 	 * @param pageable
 	 * @return
 	 */
-	@GetMapping("/")
+	@GetMapping
 	@ApiOperation(value = "Allow the user to view all degrees")
 	public PageImpl<DegreeResponse> viewDegrees(Pageable pageable) {
 		Page<DegreeEntity> degrees = degreeService.getDegree(pageable);

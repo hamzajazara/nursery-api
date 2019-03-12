@@ -39,7 +39,7 @@ public class MajorLookupController {
 	 * @param pageable
 	 * @return
 	 */
-	@GetMapping("/")
+	@GetMapping
 	@ApiOperation(value = "Allow the user to view all majors")
 	public PageImpl<MajorResponse> viewMajors(Pageable pageable) {
 		Page<MajorEntity> majors = majorService.getMajor(pageable);

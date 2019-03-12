@@ -39,7 +39,7 @@ public class CityLookupController {
 	 * @param pageable
 	 * @return
 	 */
-	@GetMapping("/")
+	@GetMapping
 	@ApiOperation(value = "Allow the user to view all cities")
 	public PageImpl<CityResponse> viewCities(Pageable pageable) {
 		Page<CityEntity> cities = cityService.getCity(pageable);
