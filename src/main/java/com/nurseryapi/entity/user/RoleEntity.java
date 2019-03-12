@@ -38,8 +38,6 @@ public class RoleEntity extends BaseEntity {
 	private long id;
 
 	@Column(name = "role_name", nullable = false, unique = true)
-	@NotNull(message = "Role name can't be null")
-	@NotBlank(message = "Role name can't be blank")
 	private String name;
 
 	@ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -28,7 +28,15 @@ import lombok.Setter;
 public class StudentUserEntity extends UserEntity {
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	// // @formatter:off
+	// @formatter:off
+	@JoinTable(name = "students_followers", 
+			   joinColumns = @JoinColumn(name = "student_user_id"), 
+	           inverseJoinColumns = @JoinColumn(name = "follower_user_id"))
+	// @formatter:on
+	private List<FollowerUserEntity> followerUsers;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	// @formatter:off
 	@JoinTable(name = "students_class_rooms", 
 			   joinColumns = @JoinColumn(name = "student_user_id"), 
 	           inverseJoinColumns = @JoinColumn(name = "class_room_id"))

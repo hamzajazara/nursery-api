@@ -6,12 +6,11 @@
 
 	<!-- Change Log -->
 	<include file="classpath:/db/changelog/db.changelog-init.xml" />
-	<include file="classpath:/db/changelog/db.changelog-lookups.xml" />
 	<include file="classpath:/db/changelog/db.changelog-oauth.xml" />
+	<include file="classpath:/db/changelog/db.changelog-lookups.xml" />
 
 	<!-- Seed -->
 	<include file="classpath:/db/seed/db.seed.oauth-client.xml" />
 	<include file="classpath:/db/seed/db.seed.user-role.xml" />
 	<include file="classpath:/db/seed/db.seed.users.xml" />
-
 </databaseChangeLog>

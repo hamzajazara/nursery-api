@@ -32,7 +32,7 @@ import lombok.Setter;
 @Getter
 public class ClassRoomEntity extends BaseEntity {
 
-	private static final long serialVersionUID = 5195258441612202390L;
+	private static final long serialVersionUID = 6211725934631307857L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,6 +54,6 @@ public class ClassRoomEntity extends BaseEntity {
 	private SchoolEntity school;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "user_id", nullable = true, foreignKey = @ForeignKey(name = "fk_class_room_user_id"))
-	private TeacherUserEntity teacher;
+	@JoinColumn(name = "principal_teacher_user_id", nullable = true, foreignKey = @ForeignKey(name = "fk_class_room_principal_teacher_user_id"))
+	private TeacherUserEntity principalTeacher;
 }

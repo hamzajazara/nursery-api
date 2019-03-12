@@ -11,9 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.nurseryapi.entity.EducationEntity;
 import com.nurseryapi.entity.SchoolEntity;
 import com.nurseryapi.entity.TopicEntity;
 
@@ -36,6 +38,10 @@ public class TeacherUserEntity extends UserEntity {
 	@JoinColumn(name = "school_id", nullable = false, foreignKey = @ForeignKey(name = "fk_teacher_user_school_id"))
 	@NotNull(message = "School can't be null")
 	private SchoolEntity school;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "education_id", nullable = false, foreignKey = @ForeignKey(name = "fk_education_grade_id"))
+	private EducationEntity education;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	// // @formatter:off

@@ -55,46 +55,34 @@ public class UserEntity extends BaseEntity implements UserDetails {
 	private long id;
 
 	@Column(name = "user_first_name", nullable = false)
-	@NotNull(message = "User first name can't be null")
-	@NotBlank(message = "User first name can't be blank")
 	private String firstName;
 
-	@Column(name = "user_last_name")
-	@NotNull(message = "User last name can't be null")
+	@Column(name = "user_last_name", nullable = false)
 	private String lastName;
 
 	@Column(name = "user_national_id", nullable = false, unique = true)
-	@NotNull(message = "User national id can't be null")
-	@NotBlank(message = "User national id can't be blank")
 	private String nationalId;
 
-	@Column(name = "user_name", nullable = false, unique = true)
-	@NotNull(message = "User name can't be null")
-	@NotBlank(message = "User name can't be blank")
+	@Column(name = "user_username", nullable = false, unique = true)
 	private String username;
 
 	@Column(name = "user_email", nullable = false, unique = true)
-	@NotNull(message = "User email can't be null")
-	@NotBlank(message = "User email can't be blank")
 	private String email;
 
 	@Column(name = "user_password", nullable = false)
 	private String password;
 
 	@Column(name = "user_phone_number")
-	@NotNull
 	private String phoneNumber;
 
 	@Column(name = "user_type", nullable = false)
 	@Enumerated(EnumType.STRING)
-	@NotNull(message = "User type can't be null")
 	private UserType userType;
 
 	@Column(name = "user_verified", nullable = false)
 	private boolean verified;
 
 	@Column(name = "user_enabled", nullable = false)
-	@NotNull
 	private boolean enabled;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -102,7 +90,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 	private List<RoleEntity> roles;
 
 	@PrePersist
-	public void setCreationDate() {
+	public void prePersist() {
 		this.username = email;
 	}
 
