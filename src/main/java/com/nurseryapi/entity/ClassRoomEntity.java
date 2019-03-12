@@ -15,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
+import com.nurseryapi.entity.lookup.GradeEntity;
 import com.nurseryapi.entity.user.TeacherUserEntity;
 
 import lombok.Getter;
@@ -39,22 +40,17 @@ public class ClassRoomEntity extends BaseEntity {
 	private long id;
 
 	@Column(name = "class_room_name", nullable = false)
-	@NotNull(message = "Class room name can't be null")
-	@NotBlank(message = "Class room name can't be blank")
 	private String name;
 
 	@Column(name = "class_room_capacity")
-	@PositiveOrZero(message = "Class room capacity must zero or positive")
 	private long capacity;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "grade_id", nullable = false, foreignKey = @ForeignKey(name = "fk_class_room_grade_id"))
-	@NotNull(message = "Class room grade can't be null")
 	private GradeEntity grade;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "school_id", nullable = false, foreignKey = @ForeignKey(name = "fk_class_room_school_id"))
-	@NotNull(message = "Class room school can't be null")
 	private SchoolEntity school;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)

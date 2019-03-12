@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet author="Hamza Aljazara" id="1">
+		<createTable tableName="cities">
+			<column autoIncrement="true" name="city_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="city_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="city_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="country_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="2">
+		<createTable tableName="countries">
+			<column autoIncrement="true" name="country_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="country_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="country_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="3">
+		<createTable tableName="degrees">
+			<column autoIncrement="true" name="degree_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="degree_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="degree_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="4">
+		<createTable tableName="educations">
+			<column autoIncrement="true" name="education_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="education_degree" type="TINYBLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="education_graduation_date"
+				type="GEOMETRY(65535)">
+				<constraints nullable="false" />
+			</column>
+			<column name="education_institution_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="education_major" type="TINYBLOB">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="5">
+		<createTable tableName="languages">
+			<column autoIncrement="true" name="language_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="language_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="language_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="6">
+		<createTable tableName="majors">
+			<column autoIncrement="true" name="major_id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="created_at" type="datetime(6)" />
+			<column name="created_by" type="BIGINT" />
+			<column name="updated_at" type="datetime(6)" />
+			<column name="updated_by" type="BIGINT" />
+			<column name="major_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="major_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="7">
+		<addColumn tableName="grades">
+			<column name="grade_label" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="8">
+		<addColumn tableName="grades">
+			<column name="major_id" type="BIGINT(19)">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="9">
+		<createIndex indexName="fk_city_country_id"
+			tableName="cities">
+			<column name="country_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="10">
+		<createIndex indexName="fk_major_major_id"
+			tableName="grades">
+			<column name="major_id" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="11">
+		<addForeignKeyConstraint
+			baseColumnNames="country_id" baseTableName="cities"
+			constraintName="fk_city_country_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="country_id" referencedTableName="countries" />
+	</changeSet>
+	<changeSet author="Hamza Aljazara" id="12">
+		<addForeignKeyConstraint
+			baseColumnNames="major_id" baseTableName="grades"
+			constraintName="fk_major_major_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="major_id" referencedTableName="majors" />
+	</changeSet>
+</databaseChangeLog>

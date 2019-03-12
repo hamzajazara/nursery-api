@@ -41,13 +41,10 @@ public class SchoolEntity extends BaseEntity {
 	private long id;
 
 	@Column(name = "school_name", nullable = false)
-	@NotNull(message = "School name can't be null")
-	@NotBlank(message = "School name can't be blank")
 	private String name;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "address_id", nullable = false, foreignKey = @ForeignKey(name = "fk_school_address_id"))
-	@NotNull(message = "Address can't be null")
 	private AddressEntity address;
 
 	@OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -55,6 +52,5 @@ public class SchoolEntity extends BaseEntity {
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "owner_user_id", nullable = false, foreignKey = @ForeignKey(name = "fk_school_owner_user_id"))
-	@NotNull(message = "Owner can't be null")
 	private OwnerUserEntity owner;
 }

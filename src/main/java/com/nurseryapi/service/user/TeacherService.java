@@ -8,6 +8,8 @@ import com.nurseryapi.entity.user.TeacherUserEntity;
 
 public interface TeacherService {
 
+	TeacherUserEntity registerTeacherUser(long schoolId, OwnerUserEntity ownerUser);
+
 	/**
 	 * 
 	 * @param teacherId
