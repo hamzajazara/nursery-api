@@ -1,7 +1,8 @@
-package com.nurseryapi.model.request;
+package com.nurseryapi.model.request.user;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nurseryapi.model.constatnt.UserType;
 
 import io.swagger.annotations.ApiModel;
@@ -29,10 +30,6 @@ public class UserRegistrationRequest {
 	@ApiModelProperty(name = "user email")
 	@NotNull
 	private String email;
-
-	@ApiModelProperty(name = "user user type")
-	@NotNull
-	private UserType userType;
 
 	@ApiModelProperty(name = "user phone number")
 	@NotNull

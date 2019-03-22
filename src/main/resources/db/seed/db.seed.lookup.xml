@@ -1,0 +1,150 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<!-- Country & City -->
+	<changeSet author="Hamza Aljazara" id="1">
+		<insert tableName="countries">
+			<column name="country_id" value="1" />
+			<column name="country_name" value="jordan" />
+			<column name="country_label" value="Jordan" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+
+		<insert tableName="cities">
+			<column name="city_id" value="1" />
+			<column name="city_name" value="amman" />
+			<column name="city_label" value="Amman" />
+			<column name="country_id" value="1" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+	</changeSet>
+
+	<!-- Degree -->
+	<changeSet author="Hamza Aljazara" id="2">
+
+		<!-- For students -->
+		<insert tableName="degrees">
+			<column name="degree_id" value="1" />
+			<column name="degree_name" value="kg1" />
+			<column name="degree_label" value="KG-1" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+		<insert tableName="degrees">
+			<column name="degree_id" value="2" />
+			<column name="degree_name" value="kg2" />
+			<column name="degree_label" value="KG-2" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+
+		<!-- For teachers -->
+		<insert tableName="degrees">
+			<column name="degree_id" value="3" />
+			<column name="degree_name" value="associate" />
+			<column name="degree_label" value="Associate's" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+		<insert tableName="degrees">
+			<column name="degree_id" value="4" />
+			<column name="degree_name" value="bachelor" />
+			<column name="degree_label" value="Bachelor's" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+		<insert tableName="degrees">
+			<column name="degree_id" value="5" />
+			<column name="degree_name" value="master" />
+			<column name="degree_label" value="Master's" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+		<insert tableName="degrees">
+			<column name="degree_id" value="6" />
+			<column name="degree_name" value="doctorate" />
+			<column name="degree_label" value="Doctorate" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+	</changeSet>
+
+	<!-- Major & Grade -->
+	<changeSet author="Hamza Aljazara" id="3">
+		<insert tableName="majors">
+			<column name="major_id" value="1" />
+			<column name="major_name" value="education_studies" />
+			<column name="major_label" value="Education Studies" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+
+		<insert tableName="grades">
+			<column name="grade_id" value="1" />
+			<column name="grade_name" value="classroom_teacher" />
+			<column name="grade_label" value="Classroom Teacher" />
+			<column name="major_id" value="1" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+	</changeSet>
+
+	<!-- Language -->
+	<changeSet author="Hamza Aljazara" id="4">
+		<insert tableName="languages">
+			<column name="language_id" value="1" />
+			<column name="language_name" value="arabic" />
+			<column name="language_label" value="Arabic" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+		<insert tableName="languages">
+			<column name="language_id" value="2" />
+			<column name="language_name" value="english" />
+			<column name="language_label" value="English" />
+
+			<column name="created_by" value="0" />
+			<column name="created_at" valueDate="now()" />
+			<column name="updated_by" value="0" />
+			<column name="updated_at" valueDate="now()" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

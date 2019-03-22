@@ -14,15 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 import com.nurseryapi.entity.lookup.DegreeEntity;
 import com.nurseryapi.entity.lookup.GradeEntity;
-import com.nurseryapi.entity.lookup.MajorEntity;
 import com.nurseryapi.entity.user.TeacherUserEntity;
-import com.vividsolutions.jts.geom.Point;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -49,7 +45,7 @@ public class EducationEntity extends BaseEntity {
 	private String institutionName;
 
 	@Column(name = "education_graduation_date", nullable = false)
-	@FutureOrPresent
+	@PastOrPresent
 	private LocalDate graduationDate;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)

@@ -18,7 +18,7 @@ import com.nurseryapi.entity.user.UserEntity;
 import com.nurseryapi.exception.NoSuchElementFoundException;
 import com.nurseryapi.exception.NotAuthorizedException;
 import com.nurseryapi.model.constatnt.UserType;
-import com.nurseryapi.model.request.UserRegistrationRequest;
+import com.nurseryapi.model.request.user.UserRegistrationRequest;
 import com.nurseryapi.repository.user.UserRepository;
 import com.nurseryapi.service.user.RoleService;
 import com.nurseryapi.service.user.UserService;
@@ -79,8 +79,9 @@ public class UserServiceImpl<T extends UserEntity> implements UserService<UserEn
 	 * UserRegistrationRequest)
 	 */
 	@Override
-	public UserEntity create(UserRegistrationRequest userRegistrationRequest) {
-		return create(userRegistrationRequest, null);
+	public UserEntity create(UserRegistrationRequest userRegistrationRequest, UserType userType) {
+		UserEntity createdUser = create(userRegistrationRequest, userType, null);
+		return save(createdUser);
 	}
 
 	/*
@@ -89,21 +90,22 @@ public class UserServiceImpl<T extends UserEntity> implements UserService<UserEn
 	 * UserRegistrationRequest, com.nurseryapi.entity.user.AdminUserEntity)
 	 */
 	@Override
-	public UserEntity create(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser) {
+	public UserEntity create(UserRegistrationRequest userRegistrationRequest, UserType userType,
+			UserEntity createdUser) {
 		if (isUserExist(userRegistrationRequest.getEmail())) {
 			throw new RuntimeException();
 		}
 
-		UserEntity userEntity = userFactory(userRegistrationRequest, adminUser);
+		UserEntity userEntity = userFactory(userRegistrationRequest, userType, createdUser);
 		userEntity.setPassword(passwordEncoder.encode(userRegistrationRequest.getPassword()));
 		userEntity.setEnabled(true);
 		userEntity.setVerified(true);
 
 		// user role
-		RoleEntity roleEntity = roleService.getRole(userRegistrationRequest.getUserType().getValue());
+		RoleEntity roleEntity = roleService.getRole(userType.getValue());
 		userEntity.setRoles(Arrays.asList(roleEntity));
 
-		return save(userEntity);
+		return userEntity;
 	}
 
 	/*
@@ -112,28 +114,35 @@ public class UserServiceImpl<T extends UserEntity> implements UserService<UserEn
 	 * request.UserRegistrationRequest, com.nurseryapi.entity.user.AdminUserEntity)
 	 */
 	@Override
-	public UserEntity userFactory(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser) {
+	public <R extends UserRegistrationRequest> UserEntity userFactory(R userRegistrationRequest, UserType userType,
+			UserEntity createdUser) {
 		UserEntity userEntity;
-		switch (userRegistrationRequest.getUserType()) {
+		switch (userType) {
 		case ADMIN:
-			if (adminUser == null) {
+			if (!(createdUser instanceof AdminUserEntity)) {
 				throw new NotAuthorizedException();
 			}
 			userEntity = Mapper.map(userRegistrationRequest, AdminUserEntity.class);
 			userEntity.setUserType(UserType.ADMIN);
 			break;
 		case OWNER:
-			if (adminUser == null) {
+			if (!(createdUser instanceof AdminUserEntity)) {
 				throw new NotAuthorizedException();
 			}
 			userEntity = Mapper.map(userRegistrationRequest, OwnerUserEntity.class);
 			userEntity.setUserType(UserType.OWNER);
 			break;
 		case PARENT:
+			if (!(createdUser instanceof OwnerUserEntity)) {
+				throw new NotAuthorizedException();
+			}
 			userEntity = Mapper.map(userRegistrationRequest, ParentUserEntity.class);
 			userEntity.setUserType(UserType.PARENT);
 			break;
 		case TEACHER:
+			if (!(createdUser instanceof OwnerUserEntity)) {
+				throw new NotAuthorizedException();
+			}
 			userEntity = Mapper.map(userRegistrationRequest, TeacherUserEntity.class);
 			userEntity.setUserType(UserType.TEACHER);
 			break;

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nurseryapi.entity.user.AdminUserEntity;
-import com.nurseryapi.model.request.UserRegistrationRequest;
+import com.nurseryapi.entity.user.UserEntity;
+import com.nurseryapi.model.constatnt.UserType;
+import com.nurseryapi.model.request.user.UserRegistrationRequest;
 import com.nurseryapi.model.response.user.UserInfoResponse;
 import com.nurseryapi.service.user.UserService;
 
@@ -32,7 +34,7 @@ import io.swagger.annotations.ApiOperation;
 public class UserController {
 
 	@Autowired
-	private UserService userService;
+	private UserService<UserEntity> userService;
 
 	/**
 	 * 
@@ -40,11 +42,12 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/register")
-	@ApiOperation(value = "User Registration")
-	public ResponseEntity<UserInfoResponse> register(
+	@ApiOperation(value = "Allow to the admin to register owner user")
+	public ResponseEntity<UserInfoResponse> registerOwner(
 			@Valid @RequestBody UserRegistrationRequest userRegistrationRequest,
 			@AuthenticationPrincipal AdminUserEntity adminUser) {
-		return new ResponseEntity<>(new UserInfoResponse(userService.create(userRegistrationRequest, adminUser)),
+		return new ResponseEntity<>(
+				new UserInfoResponse(userService.create(userRegistrationRequest, UserType.OWNER, adminUser)),
 				HttpStatus.CREATED);
 	}
 }

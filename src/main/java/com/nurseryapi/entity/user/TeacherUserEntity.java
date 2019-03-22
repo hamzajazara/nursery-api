@@ -36,7 +36,6 @@ public class TeacherUserEntity extends UserEntity {
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "school_id", nullable = false, foreignKey = @ForeignKey(name = "fk_teacher_user_school_id"))
-	@NotNull(message = "School can't be null")
 	private SchoolEntity school;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)

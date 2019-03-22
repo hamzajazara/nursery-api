@@ -1,8 +1,8 @@
 package com.nurseryapi.service.user;
 
-import com.nurseryapi.entity.user.AdminUserEntity;
 import com.nurseryapi.entity.user.UserEntity;
-import com.nurseryapi.model.request.UserRegistrationRequest;
+import com.nurseryapi.model.constatnt.UserType;
+import com.nurseryapi.model.request.user.UserRegistrationRequest;
 
 /**
  * 
@@ -28,17 +28,19 @@ public interface UserService<T extends UserEntity> {
 	/**
 	 * 
 	 * @param userRegistrationRequest
+	 * @param userType
 	 * @return
 	 */
-	T create(UserRegistrationRequest userRegistrationRequest);
+	<R extends UserRegistrationRequest> T create(R userRegistrationRequest, UserType userType);
 
 	/**
 	 * 
 	 * @param userRegistrationRequest
-	 * @param adminUser
+	 * @param userType
+	 * @param createdUser
 	 * @return
 	 */
-	T create(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser);
+	<R extends UserRegistrationRequest> T create(R userRegistrationRequest, UserType userType, UserEntity createdUser);
 
 	/**
 	 * 
@@ -50,8 +52,10 @@ public interface UserService<T extends UserEntity> {
 	/**
 	 * 
 	 * @param userRegistrationRequest
-	 * @param adminUser
+	 * @param userType
+	 * @param createdByUser
 	 * @return
 	 */
-	T userFactory(UserRegistrationRequest userRegistrationRequest, AdminUserEntity adminUser);
+	<R extends UserRegistrationRequest> UserEntity userFactory(R userRegistrationRequest, UserType userType,
+			UserEntity createdByUser);
 }
